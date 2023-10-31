@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #422a7990 #422a7950;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.hide-scroll {
+  scrollbar-width: none;
+}
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #422a7990;
+  border-radius: 40px;
+}
+*::-webkit-scrollbar-track {
+  background-color: #422a7950;
+}
+h1 {
+  font-size: 3.5rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.5rem;
+}
+h4 {
+  font-size: 2rem;
+}
+h5 {
+  font-size: 1.5rem;
+}
+h6 {
+  font-size: 1.25rem;
+}
+
+/* CHANGE OUTLINE MATERIAL UI TEXTFIELDS */
+.LoginRegisterMUI .MuiFilledInput-root {
+  border-bottom: 1px solid #b08fde !important;
+}
+.LoginRegisterMUI .MuiOutlinedInput-notchedOutline {
+  border-color: #b08fde !important;
+}
+.LoginRegisterMUI .MuiInput-root {
+  border-bottom: 1px solid #b08fde !important;
+}
+/* CHANGE LABEL COLOR MATERIAL UI TEXTFIELDS */
+.LoginRegisterMUI .MuiInputLabel-root {
+  color: #b08fde !important;
+}
+/* CHANGE BORDER-RADIUS MATERIAL UI TEXTFIELDS */
+.MuiOutlinedInput-notchedOutline {
+  border-radius: 50px !important;
+}
+.MuiInputBase-root {
+  border-radius: 50px !important;
+}
+/* FONT SIZE CHECKBOX MATERIAL UI */
+.LoginRegisterMUI .MuiFormControlLabel-label {
+  font-size: 12px !important;
+  color: #422a79;
+}
+
+/* SELECT MUI */
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root,
+.css-p0rm37 {
+  top: -7px !important;
+}
+
+input[type="file"],
+input[type="file"]::-webkit-file-upload-button {
+  cursor: pointer !important;
+}

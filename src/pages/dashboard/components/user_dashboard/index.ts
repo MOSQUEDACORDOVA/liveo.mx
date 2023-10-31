@@ -1,0 +1,10 @@
+export { ProfileHeader } from "./ProfileHeader";
+export { ProfileTabs } from "./ProfileTabs";
+export { AccountTab } from "./AccountTab";
+export { AuthPersonTab } from "./AuthPersonTab";
+export { SubscriptionCard } from "./SubscriptionCard";
+export { VaultTab } from "./VaultTab";
+export { NewWill } from "./NewWill";
+export { EditWill } from "./EditWill";
+export { ListPosthumousWill } from "./ListPosthumousWill";
+export { DocumentTab } from "./DocumentTab";
