@@ -68,7 +68,7 @@ export const CompaniesAccountTab = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 xl:pb-40">
+    <div className="flex flex-col gap-8 xl:pb-40" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
       <h5 className="font-semibold text-center lg:text-left">
         Mi empresa información
       </h5>
