@@ -116,6 +116,13 @@ export const CompaniesAccountTab = () => {
               placeholder={INPUTNAMES.COMPANIE_DESCRIPTION}
 
             />
+
+          </div>
+
+          <Divider />
+          <h5 className="mb-4">Contacto</h5>
+          <div className="grid md:grid-cols-2 gap-4">
+            
             <TextField
               onInputUpdated={handleChangeInputs}
               size="small"
@@ -125,15 +132,13 @@ export const CompaniesAccountTab = () => {
               value={formData.email}
             />
 
-            <DateField
+            <TextField
               onInputUpdated={handleChangeInputs}
-              value={formData.nacimiento ? formData.nacimiento : null}
               size="small"
-              label={INPUTLABELS.BIRTH_DATE}
-              name={INPUTNAMES.BIRTH_DATE}
-              maxDate={dayjs()}
-              format="DD-MM-YYYY"
-            />
+              label={INPUTLABELS.WEBSITE}
+              name={INPUTNAMES.WEBSITE}
+            />            
+
             <TextField
               onInputUpdated={handleChangeInputs}
               size="small"
@@ -141,6 +146,7 @@ export const CompaniesAccountTab = () => {
               name={INPUTNAMES.CELL_PHONE}
               value={formData.celular}
             />
+
             <TextField
               onInputUpdated={handleChangeInputs}
               size="small"
@@ -151,58 +157,10 @@ export const CompaniesAccountTab = () => {
           </div>
 
           <Divider />
-
-          <div className="grid md:grid-cols-1 gap-4">
-            <TextField
-              onInputUpdated={handleChangeInputs}
-              size="small"
-              label={INPUTLABELS.COMPANIE_NAME}
-              name={INPUTNAMES.NAME}
-              value={formData.name}
-            />
-            <TextField
-              onInputUpdated={handleChangeInputs}
-              size="small"
-              label={INPUTLABELS.SURNAME}
-              name={INPUTNAMES.SURNAME}
-              value={formData.apellido}
-            />
-            <TextField
-              onInputUpdated={handleChangeInputs}
-              size="small"
-              type="email"
-              label={INPUTLABELS.EMAIL}
-              name={INPUTNAMES.EMAIL}
-              value={formData.email}
-            />
-
-            <DateField
-              onInputUpdated={handleChangeInputs}
-              value={formData.nacimiento ? formData.nacimiento : null}
-              size="small"
-              label={INPUTLABELS.BIRTH_DATE}
-              name={INPUTNAMES.BIRTH_DATE}
-              maxDate={dayjs()}
-              format="DD-MM-YYYY"
-            />
-            <TextField
-              onInputUpdated={handleChangeInputs}
-              size="small"
-              label={INPUTLABELS.CELL_PHONE}
-              name={INPUTNAMES.CELL_PHONE}
-              value={formData.celular}
-            />
-            <TextField
-              onInputUpdated={handleChangeInputs}
-              size="small"
-              label={INPUTLABELS.PHONE}
-              name={INPUTNAMES.PHONE}
-              value={formData.telefono}
-            />
-          </div>
-
+          <h5 className="mb-4">Dirección</h5>
           {/* SECOND BLOCK */}
           <div className="grid md:grid-cols-2 gap-4">
+
             <TextField
               onInputUpdated={handleChangeInputs}
               size="small"
@@ -242,9 +200,9 @@ export const CompaniesAccountTab = () => {
           </div>
 
           <Divider />
-
+          <br></br>
           {/* THIRD BLOCK  */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-1 gap-4">
             <PasswordField
               onInputUpdated={handleChangeInputs}
               size="small"

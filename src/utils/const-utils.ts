@@ -38,6 +38,7 @@ export const INPUTNAMES = {
   COMPANIE_NAME: "Nombre del negocio",
   COMPANIE_SLOGAN: "Slogan",
   COMPANIE_DESCRIPTION: "Descripción",
+  WEBSITE: "Website",
   
 } as const;
 
@@ -74,6 +75,7 @@ export const INPUTLABELS = {
   COMPANIE_NAME: "Nombre del negocio",
   COMPANIE_SLOGAN: "Slogan",
   COMPANIE_DESCRIPTION: "Descripción",
+  WEBSITE: "Website",
 } as const;
 
 export const INPUTPLACEHOLDERS = {
