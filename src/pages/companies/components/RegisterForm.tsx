@@ -24,7 +24,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full md:w-[550px] bg-white relative overflow-hidden p-10 shrink-0">
+    <div className="w-full md:w-[550px] bg-white relative p-10 shrink-0" style={{ maxHeight: '100vh', overflowY: 'scroll', overflowX: 'hidden' }}>
       <img
         src={ribbon}
         alt="ribbon"
@@ -47,7 +47,7 @@ export const RegisterForm = () => {
           className="ml-1.5 mt-2"
         />
       </header>
-      <Box component="form" className="relative my-10 flex flex-col gap-5">
+      <Box component="form" className="relative my-10 flex flex-col gap-5" >
         <TextField
           onInputUpdated={handleChangeInputs}
           label={INPUTLABELS.NAME_COMPANIE}
@@ -134,6 +134,7 @@ export const RegisterForm = () => {
           full
           text="Regístrate"
           bgColor="violet"
+          to={PathNames.companyProfile}
         />
       </Box>
     </div>

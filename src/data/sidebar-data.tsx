@@ -4,6 +4,7 @@ import {
   HelpIcon,
   NotificationIcon,
   ProfileIcon,
+  CompaniesProfileIcon,
   SubsIcon,
 } from "@/icons";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
@@ -29,6 +30,11 @@ export const LinksSidebarData = [
     name: "Mi perfil",
     href: PathNames.private.profile,
     icon: <ProfileIcon />,
+  },
+  {
+    name: "Mi empresa",
+    href: PathNames.companyProfile,
+    icon: <CompaniesProfileIcon />,
   },
   {
     name: "Notificaciones",

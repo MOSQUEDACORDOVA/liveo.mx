@@ -20,6 +20,8 @@ import {
   Suscription,
   PosthumousWills,
   ReactiveAccount,
+  CompaniesProfile,
+  
 } from "@/pages";
 import { PathNames as path } from "@/config";
 import { PrivateRouteUserDashboard } from "./private/Private";
@@ -84,12 +86,14 @@ const router = createHashRouter(
         <Route path={path.terms} element={<Term />} />
         <Route path={path.privacy} element={<PrivacyPolicy />} />
 
+
         <Route path={path.subscriptions} element={<SuscriptionPage />} />
 
         <Route path={path.register_companie} element={<RegisterCompanies />} />
 
         <Route element={<PrivateRouteUserDashboard />}>
           <Route path={path.private.profile} element={<Profile />} />
+          <Route path={path.companyProfile} element={<CompaniesProfile />} />
           <Route path={path.private.subscriptions} element={<Suscription />} />
           <Route path={path.private.posthumous_wills} element={<PosthumousWills />}>
             <Route path={path.private.posthumous_wills_new} element={<NewWill />} />

@@ -15,6 +15,8 @@ export const PathNames = {
   login: "/iniciar-sesion",
   register: "/registrarse",
   register_companie: "/registrar-empresa",
+  companyProfile: "/perfil-empresa",
+
   subscriptions: "/suscripciones",
   workWithUs: "/trabaja-con-nosotros",
   contact: "/contacto",
@@ -27,10 +29,12 @@ export const PathNames = {
   videos: "/videos",
   companies: "/empresas",
   reactivate_account: "/reactivar-cuenta",
+
   private: {
     dashboard: "/dashboard",
     subscriptions: "/mis-suscripciones",
     profile: "/perfil",
+    
     notifications: "/notificaciones",
     closeSession: "/",
     posthumous_wills: "/voluntades-postumas",

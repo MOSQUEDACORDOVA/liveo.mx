@@ -106,7 +106,7 @@ export const ServiceInside = () => {
                 ? "¿Estás seguro de contratar este servicio?"
                 : "Recuerda que para contratar servicio debes de tener cuenta liveo"}
             </h4>
-          </div>
+          </ div>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
               to={userIsLogged ? PathNames.subscriptions : PathNames.login}
