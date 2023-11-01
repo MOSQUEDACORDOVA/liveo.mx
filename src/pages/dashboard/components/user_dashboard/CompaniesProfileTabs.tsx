@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AccountTab, AuthPersonTab, DocumentTab, VaultTab } from ".";
+import { CompaniesAccountTab, AuthPersonTab, DocumentTab, VaultTab } from ".";
 import { ITABSID, TABSID } from "@/utils";
 import { useSelector } from "react-redux";
 import { selectDashboardProfileActiveTab } from "@/features/LoginRegisterUser";
@@ -22,7 +22,7 @@ export const CompaniesProfileTabs = () => {
   };
 
   const handleShowTabsContent = () => {
-    if (tab === TABSID.ACCOUNT_PROFILE) return <AccountTab />;
+    if (tab === TABSID.ACCOUNT_PROFILE) return <CompaniesAccountTab />;
     if (tab === TABSID.DOCUMENTS_PROFILE) return <DocumentTab />;
     if (tab === TABSID.VAULT) return <VaultTab />;
     if (tab === TABSID.AUT_PERSON_PROFILE) return <AuthPersonTab />;

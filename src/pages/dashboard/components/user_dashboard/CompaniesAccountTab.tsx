@@ -5,10 +5,12 @@ import { Button, FileZone } from "@/components";
 import {
   DateField,
   PasswordField,
-  TextField,
+  TextField, 
+  TextArea,
 } from "../../../../components/material_ui";
 import { INPUTLABELS, INPUTNAMES } from "@/utils";
 import { useDispatch, useSelector } from "react-redux";
+import InputLabel from "@mui/material/InputLabel";
 import {
   EditProfile,
   selectDashboardProfile,
@@ -82,11 +84,79 @@ export const CompaniesAccountTab = () => {
         </div>
         <div className="grid gap-4 w-full">
           {/* FIRST BLOCK */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-1 gap-4">
+            <InputLabel htmlFor={INPUTNAMES.COMPANIE_NAME}>
+              {INPUTLABELS.COMPANIE_NAME}
+            </InputLabel>
             <TextField
               onInputUpdated={handleChangeInputs}
               size="small"
-              label={INPUTLABELS.NAME}
+              label=''
+              name={INPUTNAMES.NAME}
+              value={formData.name}
+            />
+            <InputLabel htmlFor={INPUTNAMES.COMPANIE_SLOGAN}>
+              {INPUTLABELS.COMPANIE_SLOGAN}
+            </InputLabel>
+            <TextField
+              onInputUpdated={handleChangeInputs}
+              size="small"
+              label=''
+              name={INPUTNAMES.SURNAME}
+              value={formData.apellido}
+            />
+            <InputLabel htmlFor={INPUTNAMES.COMPANIE_DESCRIPTION}>
+              {INPUTLABELS.COMPANIE_DESCRIPTION}
+            </InputLabel>
+            <TextArea
+              onInputUpdated={handleChangeInputs}
+              name={INPUTNAMES.COMPANIE_DESCRIPTION}
+              minRows={4}
+              value={INPUTNAMES.COMPANIE_DESCRIPTION}
+              placeholder={INPUTNAMES.COMPANIE_DESCRIPTION}
+
+            />
+            <TextField
+              onInputUpdated={handleChangeInputs}
+              size="small"
+              type="email"
+              label={INPUTLABELS.EMAIL}
+              name={INPUTNAMES.EMAIL}
+              value={formData.email}
+            />
+
+            <DateField
+              onInputUpdated={handleChangeInputs}
+              value={formData.nacimiento ? formData.nacimiento : null}
+              size="small"
+              label={INPUTLABELS.BIRTH_DATE}
+              name={INPUTNAMES.BIRTH_DATE}
+              maxDate={dayjs()}
+              format="DD-MM-YYYY"
+            />
+            <TextField
+              onInputUpdated={handleChangeInputs}
+              size="small"
+              label={INPUTLABELS.CELL_PHONE}
+              name={INPUTNAMES.CELL_PHONE}
+              value={formData.celular}
+            />
+            <TextField
+              onInputUpdated={handleChangeInputs}
+              size="small"
+              label={INPUTLABELS.PHONE}
+              name={INPUTNAMES.PHONE}
+              value={formData.telefono}
+            />
+          </div>
+
+          <Divider />
+
+          <div className="grid md:grid-cols-1 gap-4">
+            <TextField
+              onInputUpdated={handleChangeInputs}
+              size="small"
+              label={INPUTLABELS.COMPANIE_NAME}
               name={INPUTNAMES.NAME}
               value={formData.name}
             />
@@ -130,8 +200,6 @@ export const CompaniesAccountTab = () => {
               value={formData.telefono}
             />
           </div>
-
-          <Divider />
 
           {/* SECOND BLOCK */}
           <div className="grid md:grid-cols-2 gap-4">

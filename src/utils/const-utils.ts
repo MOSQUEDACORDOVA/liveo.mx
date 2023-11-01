@@ -35,6 +35,10 @@ export const INPUTNAMES = {
   SOCIAL_MEDIA_INSTAGRAM: "instagram",
   ADDRESSEE: "destinatario",
   SELECT_TESTAMENT_TYPE: "tipo",
+  COMPANIE_NAME: "Nombre del negocio",
+  COMPANIE_SLOGAN: "Slogan",
+  COMPANIE_DESCRIPTION: "Descripción",
+  
 } as const;
 
 export const INPUTLABELS = {
@@ -67,6 +71,9 @@ export const INPUTLABELS = {
   SOCIAL_MEDIA_INSTAGRAM: "Instagram",
   ADDRESSEE: "Destinatario",
   SELECT_TESTAMENT_TYPE: "Selecciona un servicio",
+  COMPANIE_NAME: "Nombre del negocio",
+  COMPANIE_SLOGAN: "Slogan",
+  COMPANIE_DESCRIPTION: "Descripción",
 } as const;
 
 export const INPUTPLACEHOLDERS = {
