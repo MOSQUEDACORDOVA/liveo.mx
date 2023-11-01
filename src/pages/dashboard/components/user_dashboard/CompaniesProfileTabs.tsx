@@ -6,7 +6,7 @@ import { selectDashboardProfileActiveTab } from "@/features/LoginRegisterUser";
 
 const Tabs = [
   { name: "Mi empresa", tab: TABSID.ACCOUNT_PROFILE },
-  { name: "Imagen", tab: TABSID.DOCUMENTS_PROFILE },
+  { name: "Imagen", tab: TABSID.COMPANIE_IMAGEN },
   { name: "Servicios", tab: TABSID.VAULT },
   { name: "Redes sociales", tab: TABSID.AUT_PERSON_PROFILE },
   { name: "Ubicación", tab: TABSID.AUT_PERSON_PROFILE },
@@ -23,6 +23,7 @@ export const CompaniesProfileTabs = () => {
 
   const handleShowTabsContent = () => {
     if (tab === TABSID.ACCOUNT_PROFILE) return <CompaniesAccountTab />;
+    if (tab === TABSID.COMPANIE_IMAGEN) return <VaultTab />;
     if (tab === TABSID.DOCUMENTS_PROFILE) return <DocumentTab />;
     if (tab === TABSID.VAULT) return <VaultTab />;
     if (tab === TABSID.AUT_PERSON_PROFILE) return <AuthPersonTab />;

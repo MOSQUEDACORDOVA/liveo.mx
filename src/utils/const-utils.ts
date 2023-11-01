@@ -123,6 +123,7 @@ export type ITABSID = (typeof TABSID)[keyof typeof TABSID];
 
 export const TABSID = {
   ACCOUNT_PROFILE: "account",
+  COMPANIE_IMAGEN: "imagen",
   SERVICE_PROFILE: "services",
   DOCUMENTS_PROFILE: "documents",
   VAULT: "vault",

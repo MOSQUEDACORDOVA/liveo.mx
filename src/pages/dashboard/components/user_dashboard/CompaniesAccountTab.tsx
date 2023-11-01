@@ -3,7 +3,7 @@ import { useState } from "react";
 import defaultAvatar from "@/assets/avatars/defaultAvatar.jpg";
 import { Button, FileZone } from "@/components";
 import {
-  DateField,
+
   PasswordField,
   TextField, 
   TextArea,
