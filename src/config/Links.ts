@@ -15,7 +15,7 @@ export const PathNames = {
   login: "/iniciar-sesion",
   register: "/registrarse",
   register_companie: "/registrar-empresa",
-  companyProfile: "/perfil-empresa",
+  companyProfile: "/empresa-perfil",
 
   subscriptions: "/suscripciones",
   workWithUs: "/trabaja-con-nosotros",
