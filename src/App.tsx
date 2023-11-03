@@ -2,7 +2,14 @@ import { Footer, NavBar, NavBarMobile, TopHeader } from "@/components";
 import { useAOS, useHomeData } from "./hook";
 import { ToTop } from "./components/ToTop";
 import "aos/dist/aos.css";
-import { Outlet, Route, RouterProvider, createHashRouter, createRoutesFromElements, useLocation } from "react-router-dom";
+import {
+  Outlet,
+  Route,
+  RouterProvider,
+  createHashRouter,
+  createRoutesFromElements,
+  useLocation,
+} from "react-router-dom";
 import {
   Error,
   HomePage,
@@ -21,7 +28,6 @@ import {
   PosthumousWills,
   ReactiveAccount,
   CompaniesProfile,
-  
 } from "@/pages";
 import { PathNames as path } from "@/config";
 import { PrivateRouteUserDashboard } from "./private/Private";
@@ -31,6 +37,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EditWill, NewWill } from "./pages/dashboard/components";
 import { ReportDeceased } from "./components/ReportDeceased";
+import Notaries from "./pages/notaries";
 
 export const App = () => <RouterProvider router={router} />;
 const Root = () => {
@@ -49,7 +56,10 @@ const Root = () => {
   return (
     <>
       <ToastContainer autoClose={3000} />
-      <div onClick={handleNavBarMobile} className="text-4xl relative overflow-hidden">
+      <div
+        onClick={handleNavBarMobile}
+        className="text-4xl relative overflow-hidden"
+      >
         {dont_show && (
           <>
             <TopHeader />
@@ -86,19 +96,29 @@ const router = createHashRouter(
         <Route path={path.terms} element={<Term />} />
         <Route path={path.privacy} element={<PrivacyPolicy />} />
 
-
         <Route path={path.subscriptions} element={<SuscriptionPage />} />
 
         <Route path={path.register_companie} element={<RegisterCompanies />} />
+        <Route path={path.notaries} element={<Notaries />} />
 
         <Route element={<PrivateRouteUserDashboard />}>
           <Route path={path.private.profile} element={<Profile />} />
           <Route path={path.companyProfile} element={<CompaniesProfile />} />
           <Route path={path.private.subscriptions} element={<Suscription />} />
-          <Route path={path.private.posthumous_wills} element={<PosthumousWills />}>
-            <Route path={path.private.posthumous_wills_new} element={<NewWill />} />
-            <Route path={`${path.private.posthumous_wills_edit}/:id`} element={<EditWill />} />
+          <Route
+            path={path.private.posthumous_wills}
+            element={<PosthumousWills />}
+          >
+            <Route
+              path={path.private.posthumous_wills_new}
+              element={<NewWill />}
+            />
+            <Route
+              path={`${path.private.posthumous_wills_edit}/:id`}
+              element={<EditWill />}
+            />
           </Route>
+          Ro
         </Route>
 
         <Route path={path.companies} element={<CompaniesPage />} />
