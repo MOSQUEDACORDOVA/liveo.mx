@@ -5,7 +5,7 @@ import { INPUTLABELS, INPUTNAMES } from "@/utils";
 
 import { useState } from "react";
 
-export const Login = () => {
+const Login = () => {
   const [dataUser, setDataUser] = useState({
     [INPUTNAMES.PASSWORD]: "",
     [INPUTNAMES.EMAIL]: "",
@@ -44,3 +44,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;

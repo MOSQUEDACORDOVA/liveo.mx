@@ -1,3 +1,3 @@
-export { CompaniesPage } from "./CompaniesPage";
+export { CompaniesPage } from "./companies-page";
 export * from "./auth";
 export * from "./components";
