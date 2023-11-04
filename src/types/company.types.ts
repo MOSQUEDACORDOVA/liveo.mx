@@ -6,7 +6,6 @@ export interface RegisteredCompanyRequest {
   sector: string;
   email: string;
   phoneNumber: string;
-  userName: string;
   password: string;
   privacy?: boolean;
 }

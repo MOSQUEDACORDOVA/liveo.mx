@@ -29,8 +29,7 @@ const RegisteredForm = () => {
 
   const onSubmit = async (values: RegisteredCompanyRequest) => {
     try {
-      const response = await registerCompany(values);
-      console.log({ response });
+      await registerCompany(values);
     } catch (error) {
       console.log({ error });
     }
@@ -105,14 +104,6 @@ const RegisteredForm = () => {
         </div>
 
         <TextField
-          type="email"
-          label={INPUTLABELS.EMAIL}
-          error={!!errors.email}
-          helperText={errors.email?.message}
-          {...register("email")}
-        />
-
-        <TextField
           label={INPUTLABELS.CELL_PHONE}
           error={!!errors.phoneNumber}
           helperText={errors.phoneNumber?.message}
@@ -122,10 +113,11 @@ const RegisteredForm = () => {
         <div className="flex flex-col gap-5">
           <Title title="Datos de usuario" color="light-violet" Tag="h6" />
           <TextField
-            label={INPUTLABELS.NAME_USER}
-            error={!!errors.userName}
-            helperText={errors.userName?.message}
-            {...register("userName")}
+            type="email"
+            label={INPUTLABELS.EMAIL}
+            error={!!errors.email}
+            helperText={errors.email?.message}
+            {...register("email")}
           />
           <PasswordField
             label={INPUTLABELS.PASSWORD}

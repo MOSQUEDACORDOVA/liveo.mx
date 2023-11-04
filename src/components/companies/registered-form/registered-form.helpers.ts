@@ -9,7 +9,6 @@ export const getDefaultValues = (): RegisteredCompanyRequest => ({
   sector: "",
   email: "",
   phoneNumber: "",
-  userName: "",
   password: "",
 });
 
@@ -25,7 +24,6 @@ export const getResolverValues = () =>
       .required("El correo es requerido")
       .email("El correo no es valido"),
     phoneNumber: yup.string().required("El teléfono es requerido"),
-    userName: yup.string().required("El usuario es requerido"),
     password: yup
       .string()
       .min(6, "Mínimo 6 caracteres")
