@@ -1,7 +1,7 @@
-import { RegisteredCompanyRequest } from "@/types/company.types";
 import * as yup from "yup";
+import { RegisteredFormValues } from "./registered-form.types";
 
-export const getDefaultValues = (): RegisteredCompanyRequest => ({
+export const getDefaultValues = (): RegisteredFormValues => ({
   name: "",
   city: "",
   colony: "",
@@ -10,6 +10,7 @@ export const getDefaultValues = (): RegisteredCompanyRequest => ({
   email: "",
   phoneNumber: "",
   password: "",
+  prefix: "+1",
 });
 
 export const getResolverValues = () =>
@@ -24,6 +25,7 @@ export const getResolverValues = () =>
       .required("El correo es requerido")
       .email("El correo no es valido"),
     phoneNumber: yup.string().required("El teléfono es requerido"),
+    prefix: yup.string().required("El prefijo es requerido"),
     password: yup
       .string()
       .min(6, "Mínimo 6 caracteres")
