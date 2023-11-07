@@ -33,10 +33,10 @@ import { PrivateRouteUserDashboard } from "./private/Private";
 import { useDispatch, useSelector } from "react-redux";
 import { selectShowNavMobile, showNavMobile } from "./features/NavBarSlice";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { EditWill, NewWill } from "./pages/dashboard/components";
 import { ReportDeceased } from "./components/ReportDeceased";
 import RegisterCompaniesPage from "./pages/companies/registered/registered";
+import "react-toastify/dist/ReactToastify.css";
 
 export const App = () => <RouterProvider router={router} />;
 const Root = () => {

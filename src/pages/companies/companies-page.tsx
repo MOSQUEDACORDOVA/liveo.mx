@@ -9,7 +9,7 @@ import { getEmpresas, selectCompanies } from "@/features/Empresas";
 import { useEffect } from "react";
 import { AppDispatch } from "@/features/store";
 import { PathNames } from "@/config";
-import Login from "./auth/Login";
+import LoginForm from "../../components/companies/login-form/login-form";
 
 const headerDataList = [
   "Recibe solicitudes de presupuestos todos los días",
@@ -61,7 +61,7 @@ export const CompaniesPage = () => {
             ))}
           </ul>
         </div>
-        <Login />
+        <LoginForm />
       </header>
 
       <section className="py-32 flex flex-col items-center">

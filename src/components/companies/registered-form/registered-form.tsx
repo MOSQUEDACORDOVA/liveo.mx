@@ -15,10 +15,13 @@ import CustomSelect from "@/components/material_ui/custom-select/custom-select";
 import { useRegisterCompany } from "@/services/company/company.services.hooks";
 import PhoneField from "@/components/material_ui/phone-field/phone-field";
 import { RegisteredFormValues } from "./registered-form.types";
+import { useLoginData } from "@/services/auth/login.services.hooks";
 
 const RegisteredForm = () => {
   const navigate = useNavigate();
-  const { mutateAsync: registerCompany, isLoading } = useRegisterCompany();
+  const { mutateAsync: registerCompany, isLoading: isLoadingRegister } =
+    useRegisterCompany();
+  const { mutateAsync: loginData, isLoading: isLoadingLogin } = useLoginData();
   const form = useForm<RegisteredFormValues>({
     mode: "onChange",
     defaultValues: getDefaultValues(),
@@ -34,7 +37,14 @@ const RegisteredForm = () => {
         ...values,
         phoneNumber: `${values.prefix}${values.phoneNumber}`,
       };
-      await registerCompany(data);
+      const response = await registerCompany(data);
+
+      if (!response || response?.data) return;
+
+      await loginData({
+        email: values.email,
+        password: values.password,
+      });
     } catch (error) {
       console.log({ error });
     }
@@ -155,7 +165,7 @@ const RegisteredForm = () => {
             type="submit"
             borderColor="light-violet"
             disabled={!isValid}
-            loading={isLoading}
+            loading={isLoadingRegister && isLoadingLogin}
             full
             text="Regístrate"
             bgColor="violet"
