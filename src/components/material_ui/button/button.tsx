@@ -1,45 +1,30 @@
 import { Button as ButtonMUI } from "@mui/material";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { ButtonProps as Props } from "./button.types";
 
-type IProps = {
-  to?: string;
-  text: string;
-  uppercase?: boolean;
-  bgColor?: "light-violet" | "violet" | "white" | "none";
-  border?: boolean;
-  borderColor?: "light-violet" | "violet" | "white" | "ocean";
-  textColor?: "light-violet" | "violet" | "white";
-  dataAos?: string;
-  full?: boolean;
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: "submit" | "reset" | "button";
-  loading?: boolean | null;
-  icon?: JSX.Element;
-  classNameLink?: string;
-  className?: string;
-};
+export const Button: FC<Props> = (props) => {
+  const {
+    text,
+    bgColor,
+    uppercase,
+    to = "",
+    border,
+    borderColor,
+    textColor,
+    dataAos,
+    full,
+    onClick,
+    disabled,
+    loading = null,
+    type,
+    icon,
+    classNameLink,
+    className,
+    ...rest
+  } = props;
 
-export const Button = ({
-  text,
-  bgColor,
-  uppercase,
-  to = "",
-  border,
-  borderColor,
-  textColor,
-  dataAos,
-  full,
-  onClick,
-  disabled,
-  loading = null,
-  type,
-  icon,
-  classNameLink,
-  className,
-}: IProps) => {
   const [colorB, setColorB] = useState("");
   useEffect(() => {
     switch (borderColor) {
@@ -107,23 +92,28 @@ export const Button = ({
         </LoadingButton>
       ) : (
         <ButtonMUI
-          onClick={onClick}
-          disabled={disabled}
           data-aos={dataAos}
-          type={type ?? "button"}
           sx={{
             border: border ? `1px solid ${colorB}` : "none",
           }}
           className={`${uppercase ? "uppercase" : "normal-case"}
-     ${bgColor === "light-violet" && `bg-light-violet hover:bg-light-violet/90`}
-     ${
-       bgColor === "violet" &&
-       `bg-violet hover:bg-violet/90 ${border && "border"}`
-     }
-    ${bgColor === "white" && `bg-white hover:bg-white/90 ${border && "border"}`}
-      text-white font-semibold rounded-full px-4 ${disabled && "opacity-50"} ${
-            full ? "w-full" : "w-fit"
-          } ${className}`}
+            ${
+              bgColor === "light-violet" &&
+              `bg-light-violet hover:bg-light-violet/90`
+            }
+            ${
+              bgColor === "violet" &&
+              `bg-violet hover:bg-violet/90 ${border && "border"}`
+            }
+            ${
+              bgColor === "white" &&
+              `bg-white hover:bg-white/90 ${border && "border"}`
+            }
+              text-white font-semibold rounded-full px-4 ${
+                disabled && "opacity-50"
+              } ${full ? "w-full" : "w-fit"} ${className}`}
+          type={type}
+          {...rest}
         >
           <Link
             className={`${textColor === "light-violet" && `text-light-violet`}
