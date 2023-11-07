@@ -10,7 +10,7 @@ import { getLoginFormResolverHelper } from "./login-form.helpers";
 import TextField from "@/components/material_ui/text-field/text-field";
 import PasswordField from "@/components/material_ui/password-field/password-field";
 import { Alert } from "@mui/material";
-import { useLoginData } from "@/services/auth/login.services.hooks";
+import { useLoginData } from "@/services/auth/auth.services.hooks";
 
 const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");

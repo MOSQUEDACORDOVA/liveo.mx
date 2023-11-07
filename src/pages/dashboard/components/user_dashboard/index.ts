@@ -9,5 +9,4 @@ export { EditWill } from "./EditWill";
 export { ListPosthumousWill } from "./ListPosthumousWill";
 export { DocumentTab } from "./DocumentTab";
 export { CompaniesProfileTabs } from "./CompaniesProfileTabs";
-export { CompaniesAccountTab } from "./CompaniesAccountTab";
 export { CompanieImagenTab } from "./CompanieImagenTab";
