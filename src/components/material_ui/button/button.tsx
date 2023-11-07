@@ -113,6 +113,7 @@ export const Button: FC<Props> = (props) => {
                 disabled && "opacity-50"
               } ${full ? "w-full" : "w-fit"} ${className}`}
           type={type}
+          onClick={onClick}
           {...rest}
         >
           {to ? (

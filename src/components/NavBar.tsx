@@ -1,6 +1,6 @@
 import logo from "@/assets/navbar/Logo Horizontal.png";
 import { Links, Button } from ".";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,38 +10,34 @@ import {
   removeTokenLocalStorage,
   removeUserLocalStorage,
 } from "@/config";
-import { useEffect, useState } from "react";
 import { selectIsLogged, setLogged } from "@/features/LoginRegisterUser";
+import { useQueryClient } from "react-query";
+import { useEffect } from "react";
 
 export const NavBar = () => {
   const path = useLocation().pathname;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const isLogged = useSelector(selectIsLogged);
-  const [btnName, setBtnName] = useState<
-    typeof closedSession | typeof loginSession
-  >("iniciar sesión");
   const closedSession = "cerrar sesión";
   const loginSession = "iniciar sesión";
-
-  useEffect(() => {
-    if (isLogged) {
-      setBtnName(closedSession);
-    } else {
-      setBtnName(loginSession);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLogged]);
+  const btnName = isLogged ? closedSession : loginSession;
 
   const handleShowNavMobile = (action?: string | boolean) => {
     dispatch(showNavMobile(action ?? "toggle"));
   };
 
   const handleLoggin = () => {
-    if (closedSession === btnName) {
+    if (isLogged) {
       removeUserLocalStorage();
       removeTokenLocalStorage();
       dispatch(setLogged(false));
+      queryClient.invalidateQueries(["user"]);
+      return;
     }
+
+    navigate(PathNames.login);
   };
 
   const handlelistenerUserEvents = () => {
@@ -92,9 +88,8 @@ export const NavBar = () => {
       <div className="hidden lg:flex items-center gap-8">
         <Links />
         <Button
-          onClick={() => handleLoggin()}
+          onClick={handleLoggin}
           uppercase
-          to={loginSession === btnName ? PathNames.login : ""}
           text={btnName}
           bgColor="light-violet"
         />
