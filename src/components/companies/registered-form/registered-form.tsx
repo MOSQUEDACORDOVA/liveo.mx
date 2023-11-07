@@ -15,7 +15,7 @@ import CustomSelect from "@/components/material_ui/custom-select/custom-select";
 import { useRegisterCompany } from "@/services/company/company.services.hooks";
 import PhoneField from "@/components/material_ui/phone-field/phone-field";
 import { RegisteredFormValues } from "./registered-form.types";
-import { useLoginData } from "@/services/auth/login.services.hooks";
+import { useLoginData } from "@/services/auth/auth.services.hooks";
 
 const RegisteredForm = () => {
   const navigate = useNavigate();

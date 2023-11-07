@@ -1,6 +1,6 @@
 export { NavBar } from "./NavBar";
 export { Links } from "./Links";
-export { Button } from "./Button";
+export { Button } from "./material_ui/button/button";
 export { NavBarMobile } from "./NavBarMobile";
 export { SectionHeader } from "./SectionHeader";
 export { PartOfServices } from "./PartOfServices";

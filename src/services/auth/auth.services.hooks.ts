@@ -1,9 +1,13 @@
-import { LoginData as loginData } from "@/features/LoginRegisterUser";
+import {
+  EditProfile as editProfile,
+  LoginData as loginData,
+} from "@/features/LoginRegisterUser";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LoginData } from "./login.services.types";
+import { LoginData } from "./auth.services.types";
 import { PathNames } from "@/config";
+import { IPROFILEDATA } from "@/types";
 
 export const useLoginData = () => {
   const dispatch = useDispatch<any>();
@@ -31,4 +35,13 @@ export const useLoginData = () => {
       },
     }
   );
+};
+
+export const useEditProfile = () => {
+  const dispatch = useDispatch<any>();
+
+  return useMutation(async (data: IPROFILEDATA) => {
+    const response = await dispatch(editProfile(data));
+    return response.payload;
+  });
 };
