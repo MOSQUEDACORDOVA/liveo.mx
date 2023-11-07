@@ -100,12 +100,13 @@ export const LoginData = createAsyncThunk(
       body: JSON.stringify(data),
     }).then((resp) => resp.json());
     if (response.user) {
-      if (response.user.estado === "Activo") {
-        setItemLocalStorage(storage_names.token, response.token);
-        setItemLocalStorage(storage_names.user, response.user.estado);
-        thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
-        thunkAPI.dispatch(getUserProfile(response.token));
-      }
+      // TODO: Remove this comment when the backend is ready
+      // if (response.user.estado === "Activo") {
+      setItemLocalStorage(storage_names.token, response.token);
+      setItemLocalStorage(storage_names.user, response.user.estado);
+      thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
+      thunkAPI.dispatch(getUserProfile(response.token));
+      // }
     }
     return response;
   }
