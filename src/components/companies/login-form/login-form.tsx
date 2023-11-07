@@ -9,17 +9,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { getLoginFormResolverHelper } from "./login-form.helpers";
 import TextField from "@/components/material_ui/text-field/text-field";
 import PasswordField from "@/components/material_ui/password-field/password-field";
-import { useDispatch } from "react-redux";
-import { LoginData as loginData } from "@/features/LoginRegisterUser";
-import { useNavigate } from "react-router-dom";
-import { PathNames } from "@/config";
 import { Alert } from "@mui/material";
+import { useLoginData } from "@/services/auth/login.services.hooks";
 
 const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const dispatch = useDispatch<any>();
-  const navigate = useNavigate();
+  const { mutateAsync: loginData, isLoading } = useLoginData();
   const form = useForm<LoginFormValues>({
     mode: "onChange",
     defaultValues: {
@@ -33,13 +29,10 @@ const LoginForm = () => {
 
   const onSubmit = async (values: LoginFormValues) => {
     try {
-      const { payload } = await dispatch(loginData(values));
+      const response = await loginData(values);
+      if (response.user) return;
 
-      if (payload?.user) {
-        navigate(PathNames.private.profile);
-        return;
-      }
-      setErrorMessage(payload.msg);
+      setErrorMessage(response.msg);
     } catch (error) {
       setErrorMessage("Error al iniciar sesión");
     } finally {
@@ -87,7 +80,7 @@ const LoginForm = () => {
           text="Iniciar Sesión"
           bgColor="light-violet"
           disabled={!isValid}
-          loading={false}
+          loading={isLoading}
           full
         />
       </form>
