@@ -1,9 +1,9 @@
 import { validateInput } from "@/config";
 import { INPUTNAMES } from "@/utils";
-import { TextField as MuiTextField } from "@mui/material";
+import { TextField as MuiTextField, OutlinedInputProps } from "@mui/material";
 import { useEffect, useState } from "react";
 
-interface Props {
+interface Props extends OutlinedInputProps {
   type?: string;
   label: string;
   required?: boolean;
@@ -15,7 +15,7 @@ interface Props {
   value?: string | null | undefined;
   disabled?: boolean;
 }
-export function TextField({ ...props }: Props) {
+export function TextField(props: Props) {
   const {
     clear,
     type,
@@ -27,13 +27,15 @@ export function TextField({ ...props }: Props) {
     className,
     value,
     disabled,
+    error: errorParam = false,
   } = props;
   const initialValue = {
     value: "",
     name,
   };
+
   const [data, setData] = useState(initialValue);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(errorParam);
   const [messageError, setMessageError] = useState("");
 
   const toValidateEmail =
@@ -67,6 +69,7 @@ export function TextField({ ...props }: Props) {
       }
     }
   }, [data]);
+
   useEffect(() => {
     onInputUpdated && onInputUpdated(data.name, data.value);
     clear && data.value !== "" && setData(initialValue);

@@ -1,5 +1,5 @@
 import { Copyright } from "@/components";
-import { RegisterForm } from "..";
+import RegisteredForm from "@/components/companies/registered-form/registered-form";
 
 export const RegisterCompaniesPage = () => {
   return (
@@ -7,7 +7,9 @@ export const RegisterCompaniesPage = () => {
       <div className="bg-companies_register bg-no-repeat bg-cover w-full flex p-8">
         <Copyright className="self-end" />
       </div>
-      <RegisterForm />
+      <RegisteredForm />
     </div>
   );
 };
+
+export default RegisterCompaniesPage;

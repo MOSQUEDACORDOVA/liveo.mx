@@ -47,7 +47,7 @@ export const RegisterPage = () => {
           title="Regístrate gratis"
           subtitle="Plataforma en la nube que protege tu futuro"
         >
-          <form className="flex flex-col w-full sm:w-[80%] gap-4">
+          <div className="flex flex-col w-full sm:w-[80%] gap-4">
             {/* NAME AND SURNAME */}
             <div className="flex gap-4">
               <TextField
@@ -184,7 +184,7 @@ export const RegisterPage = () => {
             {/* CHECKBOX + LABEL */}
             <Terms onChange={handleCheked} />
             {/* END */}
-          </form>
+          </div>
 
           <div className="flex flex-col gap-3 w-full sm:w-[80%]">
             <span

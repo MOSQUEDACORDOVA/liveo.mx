@@ -1,5 +1,4 @@
 import { Button, Carrousel, SectionHeader, Title } from "@/components";
-import { Login } from ".";
 import clientIcon from "@/assets/companies/+CLIENTES_ICON.png";
 import priceIcon from "@/assets/companies/icon_cotizaaldia.png";
 import partnerIcon from "@/assets/companies/icon_socios.png";
@@ -10,6 +9,7 @@ import { getEmpresas, selectCompanies } from "@/features/Empresas";
 import { useEffect } from "react";
 import { AppDispatch } from "@/features/store";
 import { PathNames } from "@/config";
+import LoginForm from "../../components/companies/login-form/login-form";
 
 const headerDataList = [
   "Recibe solicitudes de presupuestos todos los días",
@@ -61,7 +61,7 @@ export const CompaniesPage = () => {
             ))}
           </ul>
         </div>
-        <Login />
+        <LoginForm />
       </header>
 
       <section className="py-32 flex flex-col items-center">
