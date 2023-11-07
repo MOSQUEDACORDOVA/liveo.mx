@@ -15,9 +15,12 @@ import CustomSelect from "@/components/material_ui/custom-select/custom-select";
 import { useRegisterCompany } from "@/services/company/company.services.hooks";
 import PhoneField from "@/components/material_ui/phone-field/phone-field";
 import { RegisteredFormValues } from "./registered-form.types";
+import { useDispatch } from "react-redux";
+import { LoginData as loginData } from "@/features/LoginRegisterUser";
 
 const RegisteredForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
   const { mutateAsync: registerCompany, isLoading } = useRegisterCompany();
   const form = useForm<RegisteredFormValues>({
     mode: "onChange",
@@ -34,7 +37,21 @@ const RegisteredForm = () => {
         ...values,
         phoneNumber: `${values.prefix}${values.phoneNumber}`,
       };
-      await registerCompany(data);
+      const response = await registerCompany(data);
+
+      if (!response || response?.data) return;
+
+      const { payload } = await dispatch(
+        loginData({
+          email: values.email,
+          password: values.password,
+        })
+      );
+
+      if (payload?.user) {
+        navigate(PathNames.private.profile);
+        return;
+      }
     } catch (error) {
       console.log({ error });
     }
