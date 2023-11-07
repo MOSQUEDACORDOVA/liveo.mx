@@ -11,6 +11,7 @@ export const user: "Activo" | "Inactivo" = userItem
 
 const tokenItem = localStorage.getItem(storage_names.token);
 export const TOKEN: string = tokenItem ? JSON.parse(tokenItem) : false;
+export const getToken = () => localStorage.getItem(storage_names.token);
 
 const serviceItem = localStorage.getItem(storage_names.service);
 export const service: string = serviceItem ? JSON.parse(serviceItem) : false;

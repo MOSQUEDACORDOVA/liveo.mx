@@ -37,8 +37,15 @@ import { EditWill, NewWill } from "./pages/dashboard/components";
 import { ReportDeceased } from "./components/ReportDeceased";
 import RegisterCompaniesPage from "./pages/companies/registered/registered";
 import "react-toastify/dist/ReactToastify.css";
+import { useGetUserProfile } from "./services/auth/auth.services.hooks";
 
-export const App = () => <RouterProvider router={router} />;
+export const App = () => {
+  const { isLoading } = useGetUserProfile();
+  if (isLoading) return <div></div>;
+
+  return <RouterProvider router={router} />;
+};
+
 const Root = () => {
   const dispatch = useDispatch();
   const showNavBarMobile = useSelector(selectShowNavMobile);

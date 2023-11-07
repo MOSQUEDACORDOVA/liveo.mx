@@ -298,11 +298,12 @@ export const deleteAuthPerson = createAsyncThunk(
 
 export const getUserProfile = createAsyncThunk(
   "LoginRegisterUser/getUserProfile",
-  async (token: string) => {
+  async (token: string, thunkAPI) => {
     const response = await fetch(`${API}/perfil`, {
       headers: HEADERAUTH(token),
     }).then((res) => res.json());
 
+    thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
     return response;
   }
 );

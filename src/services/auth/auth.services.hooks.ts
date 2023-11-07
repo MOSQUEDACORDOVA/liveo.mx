@@ -1,12 +1,14 @@
 import {
   EditProfile as editProfile,
+  getUserProfile,
   LoginData as loginData,
+  selectIsLogged,
 } from "@/features/LoginRegisterUser";
-import { useMutation } from "react-query";
-import { useDispatch } from "react-redux";
+import { useMutation, useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginData } from "./auth.services.types";
-import { PathNames } from "@/config";
+import { PathNames, TOKEN, getToken } from "@/config";
 import { IPROFILEDATA } from "@/types";
 
 export const useLoginData = () => {
@@ -44,4 +46,20 @@ export const useEditProfile = () => {
     const response = await dispatch(editProfile(data));
     return response.payload;
   });
+};
+
+export const useGetUserProfile = () => {
+  const dispatch = useDispatch<any>();
+  const isLogged = useSelector(selectIsLogged);
+
+  return useQuery(
+    ["user", getToken()],
+    async () => {
+      const response = await dispatch(getUserProfile(getToken() ?? ""));
+      return response.payload;
+    },
+    {
+      enabled: !isLogged,
+    }
+  );
 };
