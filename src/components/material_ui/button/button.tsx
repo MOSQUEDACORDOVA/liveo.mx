@@ -115,17 +115,30 @@ export const Button: FC<Props> = (props) => {
           type={type}
           {...rest}
         >
-          <Link
-            className={`${textColor === "light-violet" && `text-light-violet`}
+          {to ? (
+            <Link
+              className={`${textColor === "light-violet" && `text-light-violet`}
       ${textColor === "violet" && `text-violet`} ${
-              textColor === "white" && `text-white`
-            }
+                textColor === "white" && `text-white`
+              }
       ${classNameLink}`}
-            to={`${to}`}
-          >
-            {icon && icon}
-            {text}
-          </Link>
+              to={`${to}`}
+            >
+              {icon && icon}
+              {text}
+            </Link>
+          ) : (
+            <p
+              className={`${textColor === "light-violet" && `text-light-violet`}
+      ${textColor === "violet" && `text-violet`} ${
+                textColor === "white" && `text-white`
+              }
+      ${classNameLink}`}
+            >
+              {icon && icon}
+              {text}
+            </p>
+          )}
         </ButtonMUI>
       )}
     </>

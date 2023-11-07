@@ -16,11 +16,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import CompaniesAccountValues from "./companies-account.types";
 import PasswordField from "@/components/material_ui/password-field/password-field";
 import TextArea from "@/components/material_ui/text-area/text-area";
+import { useEditProfile } from "@/services/auth/auth.services.hooks";
 
 const CompaniesAccountTab = () => {
   const userInfo = useSelector(selectDashboardProfile);
-  console.log({ userInfo });
+
   const [_avatarFile, setAvatarFile] = useState<File>();
+
+  const { mutateAsync: editProfile } = useEditProfile();
   const form = useForm<CompaniesAccountValues>({
     mode: "onChange",
     defaultValues: getCompanyAccountDefaultValuesHelper(userInfo),
@@ -33,34 +36,15 @@ const CompaniesAccountTab = () => {
   const { getValues } = form;
   const { errors } = formState;
   const { avatar } = getValues();
-  console.log({ avatar });
+
   const onLoadImage = useCallback((file: File) => {
     const urlFile = URL.createObjectURL(file);
     setValue("avatar", urlFile);
     setAvatarFile(file);
   }, []);
 
-  // const handleSubmit = () => {
-  //   let buildObjectToSend = {};
-  //   for (const [key, value] of Object.entries(formData)) {
-  //     if (value !== null && value !== "") {
-  //       if (key === "nacimiento" && dayjs(value).isValid()) {
-  //         buildObjectToSend = {
-  //           ...buildObjectToSend,
-  //           [key]: dayjs(value.toString()).format("YYYY-MM-DD"),
-  //         };
-  //       } else if (value !== null && value !== "" && key === "avatar") {
-  //         buildObjectToSend = { ...buildObjectToSend, avatar: _avatarFile };
-  //       } else buildObjectToSend = { ...buildObjectToSend, [key]: value };
-  //     }
-  //   }
-  //   dispatch(EditProfile(buildObjectToSend));
-  // };
-
-  console.log({ errors });
-
-  const onSubmit = (values: CompaniesAccountValues) => {
-    console.log({ values });
+  const onSubmit = async (values: CompaniesAccountValues) => {
+    await editProfile(values);
   };
 
   return (
@@ -194,9 +178,9 @@ const CompaniesAccountTab = () => {
               />
             </div>
 
-            <Divider />
+            {/* TODO: Remove if confirmed */}
+            {/* <Divider />
             <br></br>
-            {/* THIRD BLOCK  */}
             <div className="grid md:grid-cols-1 gap-4">
               <PasswordField
                 size="small"
@@ -205,7 +189,7 @@ const CompaniesAccountTab = () => {
                 helperText={errors.password?.message}
                 {...register("password")}
               />
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

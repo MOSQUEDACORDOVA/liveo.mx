@@ -13,7 +13,7 @@ export const getCompanyAccountDefaultValuesHelper = (
   dir_colonia: defaultValues?.dir_colonia || "",
   dir_pais: defaultValues?.dir_pais || "",
   email: defaultValues?.email || "",
-  password: "",
+  // password: "",
   telefono: defaultValues?.telefono || "",
   dir_calle: defaultValues?.dir_calle || "",
   dir_postal: defaultValues?.dir_postal || "",
@@ -24,7 +24,7 @@ export const getCompanyAccountDefaultValuesHelper = (
 export const getCompanyAccountResolverHelper = () =>
   yup.object().shape({
     name: yup.string().trim().required("El nombre es requerido"),
-    apellido: yup.string().trim().required("El apellido es requerido"),
+    apellido: yup.string().trim().required("El slogan es requerido"),
     celular: yup.string().trim().required("El celular es requerido"),
     dir_ciudad: yup.string().trim(),
     dir_colonia: yup.string().trim(),
@@ -39,7 +39,7 @@ export const getCompanyAccountResolverHelper = () =>
     dir_postal: yup.string().trim(),
     nacimiento: yup.string().trim(),
     avatar: yup.string().trim(),
-    password: yup.string().trim().min(6, "Mínimo 6 caracteres"),
+    // password: yup.string().trim().min(6, "Mínimo 6 caracteres"),
     website: yup.string().trim(),
     description: yup.string().trim(),
   });
