@@ -14,7 +14,6 @@ import {
 } from "./companies-account-tab.helpers";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CompaniesAccountValues from "./companies-account.types";
-import PasswordField from "@/components/material_ui/password-field/password-field";
 import TextArea from "@/components/material_ui/text-area/text-area";
 import { useEditProfile } from "@/services/auth/auth.services.hooks";
 
@@ -177,19 +176,6 @@ const CompaniesAccountTab = () => {
                 {...register("dir_pais")}
               />
             </div>
-
-            {/* TODO: Remove if confirmed */}
-            {/* <Divider />
-            <br></br>
-            <div className="grid md:grid-cols-1 gap-4">
-              <PasswordField
-                size="small"
-                label={INPUTLABELS.PASSWORD}
-                error={!!errors.password}
-                helperText={errors.password?.message}
-                {...register("password")}
-              />
-            </div> */}
           </form>
         </div>
       </div>

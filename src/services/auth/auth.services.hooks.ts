@@ -8,7 +8,7 @@ import { useMutation, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginData } from "./auth.services.types";
-import { PathNames, TOKEN, getToken } from "@/config";
+import { PathNames, getToken } from "@/config";
 import { IPROFILEDATA } from "@/types";
 
 export const useLoginData = () => {
