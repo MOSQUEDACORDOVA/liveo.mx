@@ -36,11 +36,14 @@ import { ToastContainer } from "react-toastify";
 import { EditWill, NewWill } from "./pages/dashboard/components";
 import { ReportDeceased } from "./components/ReportDeceased";
 import RegisterCompaniesPage from "./pages/companies/registered/registered";
-import "react-toastify/dist/ReactToastify.css";
 import { useGetUserProfile } from "./services/auth/auth.services.hooks";
+import { useValidateInactive } from "./hook/useValidateInactive";
+import "react-toastify/dist/ReactToastify.css";
 
 export const App = () => {
   const { isLoading } = useGetUserProfile();
+  useValidateInactive();
+
   if (isLoading) return <div></div>;
 
   return <RouterProvider router={router} />;
