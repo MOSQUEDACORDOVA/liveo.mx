@@ -109,27 +109,27 @@ const router = createHashRouter(
           element={<RegisterCompaniesPage />}
         />
 
-        <Route element={<PrivateRouteUserDashboard />}>
-          <Route path={path.private.profile} element={<Profile />} />
-          <Route path={path.companyProfile} element={<CompaniesProfile />} />
-          <Route path={path.private.subscriptions} element={<Suscription />} />
+        {/* <Route element={<PrivateRouteUserDashboard />}> */}
+        <Route path={path.private.profile} element={<Profile />} />
+        <Route path={path.companyProfile} element={<CompaniesProfile />} />
+        <Route path={path.private.subscriptions} element={<Suscription />} />
+        <Route
+          path={path.private.posthumous_wills}
+          element={<PosthumousWills />}
+        >
           <Route
-            path={path.private.posthumous_wills}
-            element={<PosthumousWills />}
-          >
-            <Route
-              path={path.private.posthumous_wills_new}
-              element={<NewWill />}
-            />
-            <Route
-              path={`${path.private.posthumous_wills_edit}/:id`}
-              element={<EditWill />}
-            />
-          </Route>
+            path={path.private.posthumous_wills_new}
+            element={<NewWill />}
+          />
+          <Route
+            path={`${path.private.posthumous_wills_edit}/:id`}
+            element={<EditWill />}
+          />
         </Route>
-
-        <Route path={path.companies} element={<CompaniesPage />} />
       </Route>
+
+      <Route path={path.companies} element={<CompaniesPage />} />
+      {/* </Route> */}
     </>
   )
 );
