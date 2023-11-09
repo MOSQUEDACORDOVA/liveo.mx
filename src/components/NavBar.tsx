@@ -12,7 +12,6 @@ import {
 } from "@/config";
 import { selectIsLogged, setLogged } from "@/features/LoginRegisterUser";
 import { useQueryClient } from "react-query";
-import { useEffect } from "react";
 
 export const NavBar = () => {
   const path = useLocation().pathname;
@@ -39,38 +38,6 @@ export const NavBar = () => {
 
     navigate(PathNames.login);
   };
-
-  const handlelistenerUserEvents = () => {
-    if (isLogged) {
-      addEventListener("mousemove", resetTimer, false);
-      addEventListener("mousedown", resetTimer, false);
-      addEventListener("keypress", resetTimer, false);
-      addEventListener("DOMMouseScroll", resetTimer, false);
-      addEventListener("mousewheel", resetTimer, false);
-      addEventListener("touchmove", resetTimer, false);
-      addEventListener("MSPointerMove", resetTimer, false);
-      startTimer();
-    } else {
-      removeEventListener("mousemove", resetTimer, false);
-      removeEventListener("mousedown", resetTimer, false);
-      removeEventListener("keypress", resetTimer, false);
-      removeEventListener("DOMMouseScroll", resetTimer, false);
-      removeEventListener("mousewheel", resetTimer, false);
-      removeEventListener("touchmove", resetTimer, false);
-      removeEventListener("MSPointerMove", resetTimer, false);
-    }
-  };
-
-  const startTimer = () => window.setTimeout(goInactive, 60000);
-
-  const resetTimer = () => {
-    window.clearTimeout(startTimer());
-    goActive();
-  };
-  const goInactive = () => handleLoggin();
-  const goActive = () => startTimer();
-
-  useEffect(() => handlelistenerUserEvents(), [isLogged]);
 
   return (
     <div
