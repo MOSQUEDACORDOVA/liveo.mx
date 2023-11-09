@@ -302,7 +302,6 @@ export const getUserProfile = createAsyncThunk(
     const response = await fetch(`${API}/perfil`, {
       headers: HEADERAUTH(token),
     }).then((res) => res.json());
-
     thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
     return response;
   }

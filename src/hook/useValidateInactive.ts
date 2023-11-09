@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { removeTokenLocalStorage, removeUserLocalStorage } from "@/config";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogged, setLogged } from "@/features/LoginRegisterUser";
@@ -12,7 +12,7 @@ export const useValidateInactive = () => {
   const isLogged = useSelector(selectIsLogged);
   const queryClient = useQueryClient();
 
-  const [inactiveTime, setInactiveTime] = useState(0);
+  const inactiveTime = useRef(0);
 
   const handleInactivity = useCallback(() => {
     if (!isLogged) return;
@@ -24,13 +24,13 @@ export const useValidateInactive = () => {
 
   useEffect(() => {
     const resetCounter = () => {
-      setInactiveTime(0);
+      inactiveTime.current = 0;
     };
 
     const detectInactivity = () => {
       inactivityTimer = setInterval(() => {
-        setInactiveTime((prev) => prev + 1);
-        if (inactiveTime >= MAX_INACTIVE_TIME) {
+        inactiveTime.current = inactiveTime.current + 1;
+        if (inactiveTime.current >= MAX_INACTIVE_TIME) {
           handleInactivity();
           resetCounter();
           clearInterval(inactivityTimer);
@@ -58,5 +58,5 @@ export const useValidateInactive = () => {
       window.removeEventListener("MSPointerMove", resetCounter);
       clearInterval(inactivityTimer);
     };
-  }, [inactiveTime, MAX_INACTIVE_TIME, handleInactivity]);
+  }, [inactiveTime.current, MAX_INACTIVE_TIME, handleInactivity]);
 };
