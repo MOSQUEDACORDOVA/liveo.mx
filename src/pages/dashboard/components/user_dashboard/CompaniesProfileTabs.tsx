@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { AuthPersonTab, DocumentTab, VaultTab, CompanieImagenTab } from ".";
+import { AuthPersonTab, DocumentTab, CompanieImagenTab } from ".";
 import { ITABSID, TABSID } from "@/utils";
 import { useSelector } from "react-redux";
 import { selectDashboardProfileActiveTab } from "@/features/LoginRegisterUser";
 import CompaniesAccountTab from "@/components/profile/companies-account-tab/companies-account-tab";
+import CompaniesServiceTab from "@/components/profile/companies-service-tab/companies-service-tab";
 
 const Tabs = [
   { name: "Mi empresa", tab: TABSID.ACCOUNT_PROFILE },
@@ -26,7 +27,7 @@ export const CompaniesProfileTabs = () => {
     if (tab === TABSID.ACCOUNT_PROFILE) return <CompaniesAccountTab />;
     if (tab === TABSID.COMPANIE_IMAGEN) return <CompanieImagenTab />;
     if (tab === TABSID.DOCUMENTS_PROFILE) return <DocumentTab />;
-    if (tab === TABSID.VAULT) return <VaultTab />;
+    if (tab === TABSID.VAULT) return <CompaniesServiceTab />;
     if (tab === TABSID.AUT_PERSON_PROFILE) return <AuthPersonTab />;
   };
 
