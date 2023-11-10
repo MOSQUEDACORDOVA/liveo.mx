@@ -6,13 +6,19 @@ import { useForm } from "react-hook-form";
 import { CompaniesServiceValues } from "./companies-service-tab.types";
 import { toast } from "react-toastify";
 import { Button } from "@/components";
+import { useEditCompanyProfile } from "@/services/auth/auth.services.hooks";
+import { useSelector } from "react-redux";
+import { IUser, selectDashboardProfile } from "@/features/LoginRegisterUser";
 
 const CompaniesServiceTab = () => {
+  const user = useSelector(selectDashboardProfile);
+
+  const { mutateAsync: editCompanyProfile } = useEditCompanyProfile();
   const { data: categoriesServices = [] } = useGetCategoriesServices();
   const form = useForm<CompaniesServiceValues>({
     defaultValues: {
-      service: "",
-      typeService: "",
+      tipo_sector: user?.tipo_sector || "",
+      sector: user?.sector || "",
       tags: [],
       tag: "",
     },
@@ -20,10 +26,12 @@ const CompaniesServiceTab = () => {
 
   const { register, handleSubmit, formState, getValues, watch, setValue } =
     form;
-  const { errors } = formState;
+  const { errors, defaultValues } = formState;
   const { tags } = watch();
 
-  const onSubmit = (values: CompaniesServiceValues) => {};
+  const onSubmit = async (values: CompaniesServiceValues) => {
+    await editCompanyProfile({ ...(user as IUser), ...values });
+  };
 
   const handleDeleteTag = (tag: string) => {
     const newTags = tags.filter((t) => t !== tag);
@@ -44,7 +52,7 @@ const CompaniesServiceTab = () => {
   return (
     <div className="flex flex-col gap-8">
       <h5 className="font-semibold lg:text-left mb-2">Mis servicios</h5>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form id="companyServiceForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid md:grid-cols-1 gap-4">
           <InputLabel htmlFor={"service"}>Categoria de servicio</InputLabel>
           <CustomSelect
@@ -52,9 +60,9 @@ const CompaniesServiceTab = () => {
             getIdOption={(option) => `${(option as CategoryService).id}`}
             getLabelOption={(option) => `${(option as CategoryService).name}`}
             getValueOption={(option) => `${(option as CategoryService).name}`}
-            defaultValue=""
+            defaultValue={defaultValues?.tipo_sector || ""}
             label=""
-            {...register("service")}
+            {...register("tipo_sector")}
           />
           <InputLabel htmlFor={"typeService"}>
             Tipos de servicios que atiende
@@ -62,21 +70,20 @@ const CompaniesServiceTab = () => {
           <TextField
             size="small"
             label=""
-            error={!!errors.typeService}
-            helperText={errors.typeService?.message}
+            error={!!errors.sector}
+            helperText={errors.sector?.message}
             fullWidth
-            {...register("typeService")}
+            {...register("sector")}
           />
           <InputLabel htmlFor={"typeService"}>Tags</InputLabel>
           <TextField
             size="small"
             label=""
-            error={!!errors.typeService}
-            helperText={errors.typeService?.message}
             fullWidth
             {...register("tag")}
             onKeyDown={(e) => {
               if (e.key !== "Enter") return;
+              e.preventDefault();
               const tagValue = getValues().tag ?? "";
               handleAddTag(tagValue);
             }}
@@ -99,7 +106,7 @@ const CompaniesServiceTab = () => {
           text="Guardar"
           bgColor="light-violet"
           classNameLink="w-40"
-          form="companyAccountForm"
+          form="companyServiceForm"
         />
         <Button
           text="Cancelar"

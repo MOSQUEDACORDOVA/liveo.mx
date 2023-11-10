@@ -21,8 +21,8 @@ type IUserRoles = {
   pivot: { model_id: number; role_id: number; model_type: string };
 };
 
-export type IUser = {
-  id: number;
+export interface IUser {
+  id?: number;
   name?: string | null;
   apellido?: string | null;
   email?: string | null;
@@ -37,10 +37,13 @@ export type IUser = {
   dir_pais?: string | null;
   dir_postal?: string | null;
   nacimiento?: string | null | Dayjs;
-  roles: IUserRoles[];
+  roles?: IUserRoles[];
+  sector?: string;
+  tipo_sector?: string;
+  tags?: string[];
   vivo: number;
   liberacion: number;
-};
+}
 
 type ILogin = {
   msg: string;
@@ -122,6 +125,45 @@ export const EditProfile = createAsyncThunk(
       method: "POST",
       headers: HEADERAUTH(LoginRegister.Login.info?.token ?? TOKEN),
       body: JSON.stringify(dataCopy),
+    }).then(async () => {
+      if (avatar && typeof avatar !== "string") {
+        await thunkAPI
+          .dispatch(setAvatar(avatar))
+          .unwrap()
+          .then(() =>
+            thunkAPI
+              .dispatch(
+                getUserProfile(LoginRegister.Login.info?.token ?? TOKEN)
+              )
+              .unwrap()
+              .then((resp) => resp)
+          );
+      } else {
+        await thunkAPI
+          .dispatch(getUserProfile(LoginRegister.Login.info?.token ?? TOKEN))
+          .unwrap()
+          .then((resp) => resp);
+      }
+    });
+    return response;
+  }
+);
+
+export const EditCompanyProfile = createAsyncThunk(
+  "LoginRegisterUser/EditProfile",
+  async (data: IPROFILEDATA, thunkAPI) => {
+    const { avatar, id, ...dataCopy } = data;
+    const { LoginRegister } = thunkAPI.getState() as RootState;
+    const { tags } = dataCopy;
+    const newData = {
+      ...dataCopy,
+      tags: JSON.stringify(tags),
+    };
+
+    const response = await fetch(`${API}/empresas/${id}`, {
+      method: "POST",
+      headers: HEADERAUTH(LoginRegister.Login.info?.token ?? TOKEN),
+      body: JSON.stringify(newData),
     }).then(async () => {
       if (avatar && typeof avatar !== "string") {
         await thunkAPI

@@ -31,11 +31,11 @@ export const NavBarMobile = () => {
   };
 
   const handleLoggin = () => {
-    // handleShowOffNavMobile();
-    // if (closedSession === btnName) {
-    //   removeUserLocalStorage();
-    //   dispatch(setLogged(false));
-    // }
+    handleShowOffNavMobile();
+    if (closedSession === btnName) {
+      removeUserLocalStorage();
+      dispatch(setLogged(false));
+    }
   };
 
   return (
