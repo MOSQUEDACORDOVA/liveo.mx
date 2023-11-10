@@ -1,5 +1,5 @@
 export interface CompaniesSocialMediaValues {
-  urlFacebook: string;
-  urlInstagram: string;
-  urlTikTok: string;
+  url_facebook?: string;
+  url_instagram?: string;
+  url_tikTok?: string;
 }

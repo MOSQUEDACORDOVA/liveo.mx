@@ -43,6 +43,9 @@ export interface IUser {
   tags?: string[];
   vivo: number;
   liberacion: number;
+  url_facebook?: string;
+  url_instagram?: string;
+  url_tikTok?: string;
 }
 
 type ILogin = {

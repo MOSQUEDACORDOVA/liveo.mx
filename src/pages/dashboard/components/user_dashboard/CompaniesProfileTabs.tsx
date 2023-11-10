@@ -2,10 +2,7 @@ import { useState } from "react";
 import { DocumentTab, CompanieImagenTab } from ".";
 import { ITABSID, TABSID } from "@/utils";
 import { useSelector } from "react-redux";
-import {
-  selectDashboardProfile,
-  selectDashboardProfileActiveTab,
-} from "@/features/LoginRegisterUser";
+import { selectDashboardProfileActiveTab } from "@/features/LoginRegisterUser";
 import CompaniesAccountTab from "@/components/profile/companies-account-tab/companies-account-tab";
 import CompaniesServiceTab from "@/components/profile/companies-service-tab/companies-service-tab";
 import CompaniesSocialMediaTab from "@/components/profile/companies-social-media-tab/companies-social-media-tab";
@@ -21,9 +18,8 @@ const Tabs = [
 
 export const CompaniesProfileTabs = () => {
   const activeTab = useSelector(selectDashboardProfileActiveTab);
-  const user = useSelector(selectDashboardProfile);
   const [tab, setTab] = useState<ITABSID>(activeTab ?? TABSID.ACCOUNT_PROFILE);
-  console.log({ user });
+
   const handleTabs = (commingTab: ITABSID) => {
     setTab(commingTab);
   };

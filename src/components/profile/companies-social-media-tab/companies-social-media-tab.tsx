@@ -3,18 +3,30 @@ import { InputLabel } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { CompaniesSocialMediaValues } from "./companies-socal-media.types";
 import { Button } from "@/components";
+import { useEditCompanyProfile } from "@/services/auth/auth.services.hooks";
+import { useSelector } from "react-redux";
+import { IUser, selectDashboardProfile } from "@/features/LoginRegisterUser";
+import {
+  getCompaniesSocialMediaDefaultValues,
+  getCompaniesSocialMediaResolvers,
+} from "./companies-social-media-tab.helpers";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const CompaniesSocialMediaTab = () => {
+  const user = useSelector(selectDashboardProfile);
+  const { mutateAsync: editCompanyProfile } = useEditCompanyProfile();
   const form = useForm<CompaniesSocialMediaValues>({
-    defaultValues: {
-      urlFacebook: "",
-      urlInstagram: "",
-      urlTikTok: "",
-    },
+    mode: "onChange",
+    defaultValues: getCompaniesSocialMediaDefaultValues(user),
+    resolver: yupResolver(getCompaniesSocialMediaResolvers()),
   });
-  const { register, handleSubmit } = form;
 
-  const onSubmit = (values: CompaniesSocialMediaValues) => {};
+  const { register, handleSubmit, formState } = form;
+  const { errors } = formState;
+
+  const onSubmit = async (values: CompaniesSocialMediaValues) => {
+    await editCompanyProfile({ ...(user as IUser), ...values });
+  };
 
   return (
     <div className="flex flex-col gap-8">
@@ -28,19 +40,25 @@ const CompaniesSocialMediaTab = () => {
         <TextField
           label=""
           placeholder="https://www.facebook.com/floreriasamillionflowers"
-          {...register("urlFacebook")}
+          error={!!errors.url_facebook}
+          helperText={errors.url_facebook?.message}
+          {...register("url_facebook")}
         />
         <InputLabel>Link Instagram</InputLabel>
         <TextField
           label=""
-          placeholder="https://www.facebook.com/floreriasamillionflowers"
-          {...register("urlInstagram")}
+          placeholder="https://www.instagram.com/floreria.amillion.flowers/?igshid=YmMyMTA2M2Y"
+          error={!!errors.url_instagram}
+          helperText={errors.url_instagram?.message}
+          {...register("url_instagram")}
         />
         <InputLabel>Link Tiktok</InputLabel>
         <TextField
           label=""
-          placeholder="https://www.facebook.com/floreriasamillionflowers"
-          {...register("urlTikTok")}
+          placeholder="https://www.tiktok.com/@floreria.amillionflowers?_t=8Z1ss5as"
+          error={!!errors.url_tikTok}
+          helperText={errors.url_tikTok?.message}
+          {...register("url_tikTok")}
         />
       </form>
       <div className="mb-5 flex justify-end gap-6 z-50">
