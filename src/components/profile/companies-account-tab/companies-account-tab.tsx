@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Button, FileZone } from "@/components";
 import { INPUTLABELS, INPUTNAMES } from "@/utils";
 import { useSelector } from "react-redux";
 import InputLabel from "@mui/material/InputLabel";
-import { selectDashboardProfile } from "@/features/LoginRegisterUser";
+import { IUser, selectDashboardProfile } from "@/features/LoginRegisterUser";
 import { Divider } from "@mui/material";
 import { useForm } from "react-hook-form";
 import TextField from "@/components/material_ui/text-field/text-field";
@@ -15,14 +15,12 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import CompaniesAccountValues from "./companies-account.types";
 import TextArea from "@/components/material_ui/text-area/text-area";
-import { useEditProfile } from "@/services/auth/auth.services.hooks";
+import { useEditCompanyProfile } from "@/services/auth/auth.services.hooks";
 
 const CompaniesAccountTab = () => {
   const userInfo = useSelector(selectDashboardProfile);
 
-  const [_avatarFile, setAvatarFile] = useState<File>();
-
-  const { mutateAsync: editProfile } = useEditProfile();
+  const { mutateAsync: editCompanyProfile } = useEditCompanyProfile();
   const form = useForm<CompaniesAccountValues>({
     mode: "onChange",
     defaultValues: getCompanyAccountDefaultValuesHelper(userInfo),
@@ -32,18 +30,17 @@ const CompaniesAccountTab = () => {
   });
 
   const { register, formState, handleSubmit, setValue } = form;
-  const { getValues } = form;
+  const { watch } = form;
   const { errors } = formState;
-  const { avatar } = getValues();
+  const { avatar } = watch();
 
   const onLoadImage = useCallback((file: File) => {
     const urlFile = URL.createObjectURL(file);
     setValue("avatar", urlFile);
-    setAvatarFile(file);
   }, []);
 
   const onSubmit = async (values: CompaniesAccountValues) => {
-    await editProfile(values);
+    await editCompanyProfile({ ...(userInfo as IUser), ...values });
   };
 
   return (
