@@ -51,7 +51,6 @@ export const useEditProfile = () => {
 export const useGetUserProfile = () => {
   const dispatch = useDispatch<any>();
   const isLogged = useSelector(selectIsLogged);
-
   return useQuery(
     ["user", getToken()],
     async () => {

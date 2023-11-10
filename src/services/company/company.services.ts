@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { API, HEADERAUTH, TOKEN } from "@/config";
+import { API, HEADERAUTH, TOKEN, getToken } from "@/config";
 import { RegisteredCompanyRequest } from "@/types/company.types";
 import { registerCompanyMapper } from "./company.services.mapper";
 import { CategoriesServiceResponseDTO } from "./company.services.models";
@@ -10,7 +10,7 @@ export const registerCompany = async (data: RegisteredCompanyRequest) => {
 
     const response = await fetch(`${API}/empresas`, {
       method: "POST",
-      headers: HEADERAUTH(TOKEN),
+      headers: HEADERAUTH(getToken()),
       body: JSON.stringify(body),
     });
     const result = await response.json();
@@ -24,7 +24,7 @@ export const getCategoriesServices = async () => {
   try {
     const response = await fetch(`${API}/categorias_empresa`, {
       method: "GET",
-      headers: HEADERAUTH(TOKEN),
+      headers: HEADERAUTH(getToken()),
     });
     const data = await response.json();
     const result = new CategoriesServiceResponseDTO().fromJSON(data);

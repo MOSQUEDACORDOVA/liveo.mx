@@ -44,7 +44,7 @@ export const App = () => {
   const { isLoading } = useGetUserProfile();
   useValidateInactive();
 
-  if (isLoading) return <div></div>;
+  if (isLoading) return <div>Loading...</div>;
 
   return <RouterProvider router={router} />;
 };
@@ -112,27 +112,27 @@ const router = createHashRouter(
           element={<RegisterCompaniesPage />}
         />
 
-        {/* <Route element={<PrivateRouteUserDashboard />}> */}
-        <Route path={path.private.profile} element={<Profile />} />
-        <Route path={path.companyProfile} element={<CompaniesProfile />} />
-        <Route path={path.private.subscriptions} element={<Suscription />} />
-        <Route
-          path={path.private.posthumous_wills}
-          element={<PosthumousWills />}
-        >
+        <Route element={<PrivateRouteUserDashboard />}>
+          <Route path={path.private.profile} element={<Profile />} />
+          <Route path={path.companyProfile} element={<CompaniesProfile />} />
+          <Route path={path.private.subscriptions} element={<Suscription />} />
           <Route
-            path={path.private.posthumous_wills_new}
-            element={<NewWill />}
-          />
-          <Route
-            path={`${path.private.posthumous_wills_edit}/:id`}
-            element={<EditWill />}
-          />
+            path={path.private.posthumous_wills}
+            element={<PosthumousWills />}
+          >
+            <Route
+              path={path.private.posthumous_wills_new}
+              element={<NewWill />}
+            />
+            <Route
+              path={`${path.private.posthumous_wills_edit}/:id`}
+              element={<EditWill />}
+            />
+          </Route>
         </Route>
-      </Route>
 
-      <Route path={path.companies} element={<CompaniesPage />} />
-      {/* </Route> */}
+        <Route path={path.companies} element={<CompaniesPage />} />
+      </Route>
     </>
   )
 );

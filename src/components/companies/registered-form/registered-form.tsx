@@ -12,15 +12,20 @@ import { getDefaultValues, getResolverValues } from "./registered-form.helpers";
 import TextField from "@/components/material_ui/text-field/text-field";
 import PasswordField from "@/components/material_ui/password-field/password-field";
 import CustomSelect from "@/components/material_ui/custom-select/custom-select";
-import { useRegisterCompany } from "@/services/company/company.services.hooks";
+import {
+  useGetCategoriesServices,
+  useRegisterCompany,
+} from "@/services/company/company.services.hooks";
 import PhoneField from "@/components/material_ui/phone-field/phone-field";
 import { RegisteredFormValues } from "./registered-form.types";
 import { useLoginData } from "@/services/auth/auth.services.hooks";
+import { CategoryService } from "@/models/category.model";
 
 const RegisteredForm = () => {
   const navigate = useNavigate();
   const { mutateAsync: registerCompany, isLoading: isLoadingRegister } =
     useRegisterCompany();
+  const { data: categoriesServices } = useGetCategoriesServices();
   const { mutateAsync: loginData, isLoading: isLoadingLogin } = useLoginData();
   const form = useForm<RegisteredFormValues>({
     mode: "onChange",
@@ -105,10 +110,19 @@ const RegisteredForm = () => {
               helperText={errors.city?.message}
               {...register("city")}
             />
-            <TextField
+            {/* <TextField
               label={INPUTLABELS.TYPE_SECTOR}
               error={!!errors.sectorType}
               helperText={errors.sectorType?.message}
+              {...register("sectorType")}
+            /> */}
+            <CustomSelect
+              label={INPUTLABELS.TYPE_SECTOR}
+              options={categoriesServices ?? []}
+              getLabelOption={(option) => (option as CategoryService).name}
+              getValueOption={(option) => (option as CategoryService).name}
+              getIdOption={(_, index) => `${index}`}
+              defaultValue={""}
               {...register("sectorType")}
             />
             <TextField
