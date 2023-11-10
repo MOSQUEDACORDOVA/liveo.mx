@@ -20,6 +20,23 @@ export const registerCompany = async (data: RegisteredCompanyRequest) => {
   }
 };
 
+export const editCompany = async (data: RegisteredCompanyRequest) => {
+  try {
+    const { id } = data;
+    const body = registerCompanyMapper(data);
+
+    const response = await fetch(`${API}/empresas/${id}`, {
+      method: "PUT",
+      headers: HEADERAUTH(getToken()),
+      body: JSON.stringify(body),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw new Error("Error al editar la empresa");
+  }
+};
+
 export const getCategoriesServices = async () => {
   try {
     const response = await fetch(`${API}/categorias_empresa`, {
