@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { API, HEADERAUTH, TOKEN, getToken } from "@/config";
+import { API, HEADERAUTH, getToken } from "@/config";
 import { RegisteredCompanyRequest } from "@/types/company.types";
 import { registerCompanyMapper } from "./company.services.mapper";
 import { CategoriesServiceResponseDTO } from "./company.services.models";
@@ -17,23 +17,6 @@ export const registerCompany = async (data: RegisteredCompanyRequest) => {
     return result;
   } catch (error) {
     throw new Error("Error al registrar la empresa");
-  }
-};
-
-export const editCompany = async (data: RegisteredCompanyRequest) => {
-  try {
-    const { id } = data;
-    const body = registerCompanyMapper(data);
-
-    const response = await fetch(`${API}/empresas/${id}`, {
-      method: "PUT",
-      headers: HEADERAUTH(getToken()),
-      body: JSON.stringify(body),
-    });
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    throw new Error("Error al editar la empresa");
   }
 };
 

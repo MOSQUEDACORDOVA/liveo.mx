@@ -15,6 +15,7 @@ export const getDefaultValues = (): RegisteredFormValues => ({
 
 export const getResolverValues = () =>
   yup.object().shape({
+    id: yup.number(),
     name: yup.string().trim().required("El nombre es requerido"),
     colony: yup.string().required("La colonia es requerida"),
     city: yup.string().trim().required("La ciudad es requerida"),

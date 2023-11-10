@@ -1,6 +1,6 @@
 export interface CompaniesServiceValues {
-  service: string;
-  typeService: string;
+  tipo_sector: string;
+  sector: string;
   tags: string[];
   tag?: string;
 }
