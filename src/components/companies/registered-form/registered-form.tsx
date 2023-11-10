@@ -183,7 +183,6 @@ const RegisteredForm = () => {
             full
             text="Regístrate"
             bgColor="violet"
-            // to={PathNames.companyProfile}
           />
         </form>
       </FormProvider>
