@@ -39,7 +39,6 @@ export const INPUTNAMES = {
   COMPANIE_SLOGAN: "Slogan",
   COMPANIE_DESCRIPTION: "Descripción",
   WEBSITE: "Website",
-  
 } as const;
 
 export const INPUTLABELS = {
@@ -129,6 +128,7 @@ export const TABSID = {
   VAULT: "vault",
   AUT_PERSON_PROFILE: "auth_person",
   CONFIGURATION_PROFILE: "config",
+  FAQ_PROFILE: "faq",
 } as const;
 
 export const SERVICE_TYPE = {
