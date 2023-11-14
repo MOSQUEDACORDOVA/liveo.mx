@@ -5,7 +5,7 @@ export interface CustomSelectProps<T> extends SelectProps {
   options: T[];
   name: string;
   size?: "small" | "medium";
-  defaultValue: string;
+  defaultValue?: string;
   onInputUpdated?: (name: string, value: string) => void;
   getLabelOption: (option: T) => string;
   getValueOption: (option: T) => string;
