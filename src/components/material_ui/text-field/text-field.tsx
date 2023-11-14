@@ -28,8 +28,8 @@ const TextField: FC<TextFieldProps> = forwardRef((props, ref) => {
       variant="outlined"
       size={size}
       type={type ?? "text"}
-      ref={ref}
       {...rest}
+      ref={ref}
     />
   );
 });
