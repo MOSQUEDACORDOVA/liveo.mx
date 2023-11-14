@@ -56,9 +56,9 @@ const CompaniesSocialMediaTab = () => {
         <TextField
           label=""
           placeholder="https://www.tiktok.com/@floreria.amillionflowers?_t=8Z1ss5as"
-          error={!!errors.url_tikTok}
-          helperText={errors.url_tikTok?.message}
-          {...register("url_tikTok")}
+          error={!!errors.url_tiktok}
+          helperText={errors.url_tiktok?.message}
+          {...register("url_tiktok")}
         />
       </form>
       <div className="mb-5 flex justify-end gap-6 z-50">

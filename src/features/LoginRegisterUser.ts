@@ -45,7 +45,7 @@ export interface IUser {
   liberacion: number;
   url_facebook?: string;
   url_instagram?: string;
-  url_tikTok?: string;
+  url_tiktok?: string;
 }
 
 type ILogin = {
