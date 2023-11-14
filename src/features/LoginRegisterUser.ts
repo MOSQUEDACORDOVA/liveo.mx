@@ -159,7 +159,7 @@ export const EditCompanyProfile = createAsyncThunk(
       ...dataCopy,
       tags: JSON.stringify(tags),
     };
-
+    delete newData["password"];
     const response = await fetch(`${API}/empresas/${id}`, {
       method: "POST",
       headers: HEADERAUTH(LoginRegister.Login.info?.token ?? TOKEN),
@@ -343,7 +343,13 @@ export const getUserProfile = createAsyncThunk(
   async (token: string, thunkAPI) => {
     const response = await fetch(`${API}/perfil`, {
       headers: HEADERAUTH(token),
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const { data } = res;
+        const tags = data.tags ? JSON.parse(data.tags) : [];
+        return { ...data, tags };
+      });
     thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
     return response;
   }

@@ -44,7 +44,7 @@ export const App = () => {
   const { isLoading } = useGetUserProfile();
   useValidateInactive();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div></div>;
 
   return <RouterProvider router={router} />;
 };

@@ -19,7 +19,7 @@ const CompaniesServiceTab = () => {
     defaultValues: {
       tipo_sector: user?.tipo_sector || "",
       sector: user?.sector || "",
-      tags: [],
+      tags: user?.tags || [],
       tag: "",
     },
   });
@@ -89,9 +89,9 @@ const CompaniesServiceTab = () => {
             }}
           />
           <div>
-            {tags.map((tag) => (
+            {tags.map((tag, index) => (
               <Chip
-                key={tag}
+                key={index}
                 label={tag}
                 onDelete={() => handleDeleteTag(tag)}
                 className="bg-light-violet text-white mr-2"
