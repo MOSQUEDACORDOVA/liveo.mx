@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogged, setLogged } from "@/features/LoginRegisterUser";
 import { useQueryClient } from "react-query";
 
-const MAX_INACTIVE_TIME = 60 * 1; // 1 minute
+const MAX_INACTIVE_TIME = 60 * 60; // 1 minute
 let inactivityTimer: any = null;
 
 export const useValidateInactive = () => {
