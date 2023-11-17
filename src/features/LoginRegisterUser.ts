@@ -47,6 +47,7 @@ export interface IUser {
   url_instagram?: string;
   url_tiktok?: string;
   iframe_google?: string;
+  imagen_principal_empresa?: any;
 }
 
 type ILogin = {

@@ -7,7 +7,9 @@ import { AppDispatch } from "@/features/store";
 import { deleteFile, setFile } from "@/features/HomeSlice";
 import { TOKEN } from "@/config";
 import {
+  IUser,
   getFiles,
+  selectDashboardProfile,
   selectDashboardProfileFiles,
   selectLoginInfo,
 } from "@/features/LoginRegisterUser";
@@ -15,12 +17,19 @@ import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
 import { Paragraph } from "@/layout";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { IconButton, Modal } from "@mui/material";
+import {
+  useEditCompanyProfile,
+  useGetUserProfile,
+} from "@/services/auth/auth.services.hooks";
 
-export const CompanieImagenTab = () => {
+const CompaniesImagesTab = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [document, setDocument] = useState<File | null>(null);
+  const { mutateAsync: editCompanyProfile } = useEditCompanyProfile();
   const login_info = useSelector(selectLoginInfo);
+  const user = useSelector(selectDashboardProfile);
   const Files = useSelector(selectDashboardProfileFiles);
+  console.log({ user, login_info });
 
   const onLoadDocument = (file: File) => {
     setDocument(file);
@@ -30,16 +39,23 @@ export const CompanieImagenTab = () => {
     dispatch(getFiles());
   }, []);
 
-  const handleSendFile = () => {
-    document &&
-      dispatch(
-        setFile({
-          file: document,
-          token: login_info?.token ? login_info.token : TOKEN,
-        })
-      )
-        .unwrap()
-        .then(() => dispatch(getFiles()).then(() => setDocument(null)));
+  const handleSendFile = async () => {
+    // document &&
+    //   dispatch(
+    //     setFile({
+    //       file: document,
+    //       token: getToken(),
+    //     })
+    //   )
+    //     .unwrap()
+    //     .then(() => dispatch(getFiles()).then(() => setDocument(null)));
+    console.log({ document });
+    if (document) {
+      await editCompanyProfile({
+        ...user,
+        imagen_principal_empresa: document,
+      } as IUser);
+    }
   };
 
   const handleNameFile = (url: string) => url.split("/").at(-1);
@@ -59,9 +75,7 @@ export const CompanieImagenTab = () => {
 
   return (
     <div className="flex flex-col gap-8 ">
-      <h5 className="font-semibold lg:text-left mb-2">
-        Mi imagen
-      </h5>
+      <h5 className="font-semibold lg:text-left mb-2">Mi imagen</h5>
       <h6>Adjuntar imagen principal</h6>
       <Modal
         open={verificationModal}
@@ -167,3 +181,5 @@ export const CompanieImagenTab = () => {
     </div>
   );
 };
+
+export default CompaniesImagesTab;
