@@ -1,4 +1,5 @@
 export interface RegisteredCompanyRequest {
+  id?: number;
   name: string;
   city: string;
   colony: string;

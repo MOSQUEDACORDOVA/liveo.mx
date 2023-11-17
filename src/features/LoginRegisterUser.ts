@@ -21,8 +21,8 @@ type IUserRoles = {
   pivot: { model_id: number; role_id: number; model_type: string };
 };
 
-export type IUser = {
-  id: number;
+export interface IUser {
+  id?: number;
   name?: string | null;
   apellido?: string | null;
   email?: string | null;
@@ -37,10 +37,17 @@ export type IUser = {
   dir_pais?: string | null;
   dir_postal?: string | null;
   nacimiento?: string | null | Dayjs;
-  roles: IUserRoles[];
+  roles?: IUserRoles[];
+  sector?: string;
+  tipo_sector?: string;
+  tags?: string[];
   vivo: number;
   liberacion: number;
-};
+  url_facebook?: string;
+  url_instagram?: string;
+  url_tiktok?: string;
+  iframe_google?: string;
+}
 
 type ILogin = {
   msg: string;
@@ -122,6 +129,45 @@ export const EditProfile = createAsyncThunk(
       method: "POST",
       headers: HEADERAUTH(LoginRegister.Login.info?.token ?? TOKEN),
       body: JSON.stringify(dataCopy),
+    }).then(async () => {
+      if (avatar && typeof avatar !== "string") {
+        await thunkAPI
+          .dispatch(setAvatar(avatar))
+          .unwrap()
+          .then(() =>
+            thunkAPI
+              .dispatch(
+                getUserProfile(LoginRegister.Login.info?.token ?? TOKEN)
+              )
+              .unwrap()
+              .then((resp) => resp)
+          );
+      } else {
+        await thunkAPI
+          .dispatch(getUserProfile(LoginRegister.Login.info?.token ?? TOKEN))
+          .unwrap()
+          .then((resp) => resp);
+      }
+    });
+    return response;
+  }
+);
+
+export const EditCompanyProfile = createAsyncThunk(
+  "LoginRegisterUser/EditProfile",
+  async (data: IPROFILEDATA, thunkAPI) => {
+    const { avatar, id, ...dataCopy } = data;
+    const { LoginRegister } = thunkAPI.getState() as RootState;
+    const { tags } = dataCopy;
+    const newData = {
+      ...dataCopy,
+      tags: JSON.stringify(tags),
+    };
+    delete newData["password"];
+    const response = await fetch(`${API}/empresas/${id}`, {
+      method: "POST",
+      headers: HEADERAUTH(LoginRegister.Login.info?.token ?? TOKEN),
+      body: JSON.stringify(newData),
     }).then(async () => {
       if (avatar && typeof avatar !== "string") {
         await thunkAPI
@@ -301,7 +347,13 @@ export const getUserProfile = createAsyncThunk(
   async (token: string, thunkAPI) => {
     const response = await fetch(`${API}/perfil`, {
       headers: HEADERAUTH(token),
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const { data } = res;
+        const tags = data.tags ? JSON.parse(data.tags) : [];
+        return { ...data, tags };
+      });
     thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
     return response;
   }

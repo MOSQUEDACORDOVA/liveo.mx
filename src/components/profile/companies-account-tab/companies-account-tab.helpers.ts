@@ -13,7 +13,6 @@ export const getCompanyAccountDefaultValuesHelper = (
   dir_colonia: defaultValues?.dir_colonia || "",
   dir_pais: defaultValues?.dir_pais || "",
   email: defaultValues?.email || "",
-  // password: "",
   telefono: defaultValues?.telefono || "",
   dir_calle: defaultValues?.dir_calle || "",
   dir_postal: defaultValues?.dir_postal || "",
@@ -39,7 +38,6 @@ export const getCompanyAccountResolverHelper = () =>
     dir_postal: yup.string().trim(),
     nacimiento: yup.string().trim(),
     avatar: yup.string().trim(),
-    // password: yup.string().trim().min(6, "Mínimo 6 caracteres"),
     website: yup.string().trim(),
     description: yup.string().trim(),
   });

@@ -2,7 +2,9 @@ import {
   EditProfile as editProfile,
   getUserProfile,
   LoginData as loginData,
+  EditCompanyProfile as editCompanyProfile,
   selectIsLogged,
+  IUser,
 } from "@/features/LoginRegisterUser";
 import { useMutation, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,10 +50,18 @@ export const useEditProfile = () => {
   });
 };
 
+export const useEditCompanyProfile = () => {
+  const dispatch = useDispatch<any>();
+
+  return useMutation(async (data: IUser) => {
+    const response = await dispatch(editCompanyProfile(data));
+    return response.payload;
+  });
+};
+
 export const useGetUserProfile = () => {
   const dispatch = useDispatch<any>();
   const isLogged = useSelector(selectIsLogged);
-
   return useQuery(
     ["user", getToken()],
     async () => {
