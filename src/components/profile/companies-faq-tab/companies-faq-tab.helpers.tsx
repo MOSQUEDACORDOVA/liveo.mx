@@ -7,31 +7,19 @@ export const faqSections: CompaniesFaqSection[] = [
     questions: [
       {
         id: 1,
-        question: "¿Cómo puedo cambiar mi contraseña?",
+        question: "¿Para que me sirve tener un perfil de proveedor?",
         answer:
           "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
       },
       {
         id: 2,
-        question: "¿Cómo puedo cambiar mi contraseña?",
+        question: "¿Puedo crear perfil de usuario y otro perfil de proveedor?",
         answer:
           "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
       },
       {
         id: 3,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-      {
-        id: 4,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-      {
-        id: 5,
-        question: "¿Cómo puedo cambiar mi contraseña?",
+        question: "¿Cuánto cuesta crear un perfil de proveedor?",
         answer:
           "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
       },
@@ -43,31 +31,26 @@ export const faqSections: CompaniesFaqSection[] = [
     questions: [
       {
         id: 1,
-        question: "¿Cómo puedo cambiar mi contraseña?",
+        question:
+          "¿Cómo funciona la suscripción de proveedor y para que sirve?",
         answer:
           "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
       },
       {
         id: 2,
-        question: "¿Cómo puedo cambiar mi contraseña?",
+        question: "¿Qué tipo de suscipciones para proveedor existen?",
         answer:
           "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
       },
       {
         id: 3,
-        question: "¿Cómo puedo cambiar mi contraseña?",
+        question: "¿Qué es LIVEO Ads, cómo funcionan y para que sirven?",
         answer:
           "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
       },
       {
         id: 4,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-      {
-        id: 5,
-        question: "¿Cómo puedo cambiar mi contraseña?",
+        question: "¿Qué costo tiene LIVEO Ads?",
         answer:
           "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
       },
@@ -76,37 +59,11 @@ export const faqSections: CompaniesFaqSection[] = [
   {
     id: 3,
     title: "Privacidad y Civerseguridad",
-    questions: [
-      {
-        id: 1,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-      {
-        id: 2,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-      {
-        id: 3,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-      {
-        id: 4,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-      {
-        id: 5,
-        question: "¿Cómo puedo cambiar mi contraseña?",
-        answer:
-          "Puedes cambiar tu contraseña en la sección de Perfil. Haz clic en el botón de “Editar” y luego en “Cambiar contraseña”.",
-      },
-    ],
+    questions: [],
+  },
+  {
+    id: 4,
+    title: "Información General",
+    questions: [],
   },
 ];
