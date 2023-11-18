@@ -8,19 +8,7 @@ import {
 import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
 
 import { useState } from "react";
-
-type IProps = {
-  name: string;
-  title: string;
-  description?: string;
-  child?: JSX.Element;
-  icon?: JSX.Element;
-  className?: string;
-  textColor?: "white";
-  maxWidth?: number | string;
-  classNameContainer?: string;
-  expandedNow?: string;
-};
+import { AccordionProps as Props } from "./accordion.types";
 
 export function Accordion({
   description,
@@ -33,7 +21,7 @@ export function Accordion({
   child,
   classNameContainer,
   expandedNow,
-}: IProps) {
+}: Props) {
   const [expanded, setExpanded] = useState<string | false>(
     expandedNow ?? false
   );
