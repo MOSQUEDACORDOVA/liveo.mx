@@ -19,6 +19,7 @@ export const getCompanyAccountDefaultValuesHelper = (
   nacimiento: defaultValues?.nacimiento || "",
   avatar: defaultValues?.avatar ?? defaultAvatar,
   descripcion: defaultValues?.descripcion || "",
+  web_site: defaultValues?.web_site || "",
 });
 
 export const getCompanyAccountResolverHelper = () =>
@@ -39,6 +40,6 @@ export const getCompanyAccountResolverHelper = () =>
     dir_postal: yup.string().trim(),
     nacimiento: yup.string().trim(),
     avatar: yup.string().trim(),
-    website: yup.string().trim(),
+    web_site: yup.string().trim(),
     descripcion: yup.string().trim(),
   });
