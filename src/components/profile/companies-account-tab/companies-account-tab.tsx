@@ -110,9 +110,9 @@ const CompaniesAccountTab = () => {
               <TextField
                 size="small"
                 label={INPUTLABELS.WEBSITE}
-                error={!!errors.website}
-                helperText={errors.website?.message}
-                {...register("website")}
+                error={!!errors.web_site}
+                helperText={errors.web_site?.message}
+                {...register("web_site")}
               />
 
               <TextField

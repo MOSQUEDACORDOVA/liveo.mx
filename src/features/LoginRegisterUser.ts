@@ -49,6 +49,7 @@ export interface IUser {
   iframe_google?: string;
   imagen_principal_empresa?: any;
   descripcion?: string;
+  web_site?: string;
 }
 
 type ILogin = {
