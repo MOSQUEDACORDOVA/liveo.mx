@@ -91,7 +91,7 @@ const CompaniesAccountTab = () => {
               <TextArea
                 minRows={4}
                 placeholder={INPUTNAMES.COMPANIE_DESCRIPTION}
-                {...register("description")}
+                {...register("descripcion")}
               />
             </div>
 
