@@ -14,5 +14,5 @@ export default interface CompaniesAccountValues {
   nacimiento?: string | Dayjs;
   website?: string;
   avatar?: string;
-  description?: string;
+  descripcion?: string;
 }

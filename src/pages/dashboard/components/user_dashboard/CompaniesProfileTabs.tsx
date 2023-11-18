@@ -5,6 +5,7 @@ import { selectDashboardProfileActiveTab } from "@/features/LoginRegisterUser";
 import CompaniesAccountTab from "@/components/profile/companies-account-tab/companies-account-tab";
 import CompaniesServiceTab from "@/components/profile/companies-service-tab/companies-service-tab";
 import CompaniesSocialMediaTab from "@/components/profile/companies-social-media-tab/companies-social-media-tab";
+import { CompaniesFaqTab } from "@/components/profile/companies-faq-tab/companies-faq-tab";
 import CompaniesLocationsTab from "@/components/profile/companies-locations-tab/companies-locations-tab";
 import UserDocumentsTab from "@/components/profile/user-documents-tab/user-documents-tab";
 import CompaniesImagesTab from "@/components/profile/companies-images-tab/companies-images-tab";
@@ -14,8 +15,8 @@ const Tabs = [
   { name: "Imagen", tab: TABSID.COMPANIE_IMAGEN },
   { name: "Servicios", tab: TABSID.VAULT },
   { name: "Redes sociales", tab: TABSID.AUT_PERSON_PROFILE },
-  { name: "Ubicación", tab: TABSID.LOCATIONS_PROFIILE },
-  { name: "Faq", tab: TABSID.AUT_PERSON_PROFILE },
+  { name: "Ubicación", tab: TABSID.AUT_PERSON_PROFILE },
+  { name: "Faq", tab: TABSID.FAQ_PROFILE },
 ] as const;
 
 export const CompaniesProfileTabs = () => {
@@ -33,6 +34,7 @@ export const CompaniesProfileTabs = () => {
     if (tab === TABSID.VAULT) return <CompaniesServiceTab />;
     if (tab === TABSID.LOCATIONS_PROFIILE) return <CompaniesLocationsTab />;
     if (tab === TABSID.AUT_PERSON_PROFILE) return <CompaniesSocialMediaTab />;
+    if (tab === TABSID.FAQ_PROFILE) return <CompaniesFaqTab />;
   };
 
   return (
