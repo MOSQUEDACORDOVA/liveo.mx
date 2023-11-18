@@ -14,7 +14,7 @@ const Tabs = [
   { name: "Imagen", tab: TABSID.COMPANIE_IMAGEN },
   { name: "Servicios", tab: TABSID.VAULT },
   { name: "Redes sociales", tab: TABSID.AUT_PERSON_PROFILE },
-  { name: "Ubicación", tab: TABSID.AUT_PERSON_PROFILE },
+  { name: "Ubicación", tab: TABSID.LOCATIONS_PROFIILE },
   { name: "Faq", tab: TABSID.FAQ_PROFILE },
 ] as const;
 
