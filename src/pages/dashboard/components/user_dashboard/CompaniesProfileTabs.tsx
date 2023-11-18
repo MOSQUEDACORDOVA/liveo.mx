@@ -7,6 +7,7 @@ import CompaniesAccountTab from "@/components/profile/companies-account-tab/comp
 import CompaniesServiceTab from "@/components/profile/companies-service-tab/companies-service-tab";
 import CompaniesSocialMediaTab from "@/components/profile/companies-social-media-tab/companies-social-media-tab";
 import { CompaniesFaqTab } from "@/components/profile/companies-faq-tab/companies-faq-tab";
+import CompaniesLocationsTab from "@/components/profile/companies-locations-tab/companies-locations-tab";
 
 const Tabs = [
   { name: "Mi empresa", tab: TABSID.ACCOUNT_PROFILE },
@@ -30,6 +31,7 @@ export const CompaniesProfileTabs = () => {
     if (tab === TABSID.COMPANIE_IMAGEN) return <CompanieImagenTab />;
     if (tab === TABSID.DOCUMENTS_PROFILE) return <DocumentTab />;
     if (tab === TABSID.VAULT) return <CompaniesServiceTab />;
+    if (tab === TABSID.LOCATIONS_PROFIILE) return <CompaniesLocationsTab />;
     if (tab === TABSID.AUT_PERSON_PROFILE) return <CompaniesSocialMediaTab />;
     if (tab === TABSID.FAQ_PROFILE) return <CompaniesFaqTab />;
   };

@@ -127,6 +127,7 @@ export const TABSID = {
   DOCUMENTS_PROFILE: "documents",
   VAULT: "vault",
   AUT_PERSON_PROFILE: "auth_person",
+  LOCATIONS_PROFIILE: "locations",
   CONFIGURATION_PROFILE: "config",
   FAQ_PROFILE: "faq",
 } as const;
