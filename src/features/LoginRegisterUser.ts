@@ -155,7 +155,7 @@ export const EditProfile = createAsyncThunk(
 
 export const EditCompanyProfile = createAsyncThunk(
   "LoginRegisterUser/EditProfile",
-  async (data: IPROFILEDATA, thunkAPI) => {
+  async (data: IUser, thunkAPI) => {
     const { avatar, id, ...dataCopy } = data;
     const { LoginRegister } = thunkAPI.getState() as RootState;
     const { tags } = dataCopy;
