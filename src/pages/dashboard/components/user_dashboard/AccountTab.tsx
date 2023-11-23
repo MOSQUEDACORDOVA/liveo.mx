@@ -36,7 +36,7 @@ export const AccountTab = () => {
     dir_postal: userInfo?.dir_postal,
     nacimiento: userInfo?.nacimiento,
     avatar: userInfo?.avatar ?? defaultAvatar,
-  });
+  } as IPROFILEDATA);
 
   const onLoadImage = (file: File) => {
     const url_file = URL.createObjectURL(file);
@@ -75,7 +75,7 @@ export const AccountTab = () => {
         <div className="relative shrink-0 w-36 h-36 mx-auto">
           <FileZone onLoadFile={onLoadImage} name="profileAvatar" />
           <img
-            src={formData.avatar}
+            src={formData.avatar as string}
             alt="avatar"
             className="rounded-full w-full h-full object-cover"
           />

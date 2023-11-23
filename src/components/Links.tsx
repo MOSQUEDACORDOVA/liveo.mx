@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-import { links } from "@/data";
+import { getLinks } from "@/data";
 import { useNavBar } from "@/hook";
+import { useSelector } from "react-redux";
+import { selectDashboardProfile } from "@/features/LoginRegisterUser";
 
-export const Links = ({
-  row,
-  onClick,
-}: {
-  row?: boolean;
-  onClick?: () => void;
-}) => {
+export const Links = (props: { row?: boolean; onClick?: () => void }) => {
+  const { row, onClick } = props;
   const { path, handleActiveLink, isLogged } = useNavBar();
+  const user = useSelector(selectDashboardProfile);
+  const { roles } = user ?? {};
 
   const handleLinks = (index: number) => {
     onClick && onClick();
@@ -18,7 +17,7 @@ export const Links = ({
 
   return (
     <ul className={`flex ${row && "flex-col"} my-2 gap-6 items-center`}>
-      {links.map((item, index) => (
+      {getLinks(roles).map((item, index) => (
         <Link
           to={`${item.url}`}
           onClick={() => handleLinks(index)}
