@@ -1,9 +1,10 @@
 import { API, HEADERAUTH, getToken } from "@/config";
 
-export const getCompaniesImages = async () => {
+export const getCompaniesImages = async (data: FormData) => {
   try {
     const response = await fetch(`${API}/empresas-img/`, {
       headers: HEADERAUTH(getToken()),
+      body: data,
     }).then((resp) => resp.json());
 
     return response;

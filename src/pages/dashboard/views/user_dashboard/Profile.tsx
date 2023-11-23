@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useScrollToTop } from "@/hook";
-import { SideBar } from "../../components";
 import { ProfileContent } from "../../content";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +13,7 @@ import {
 } from "@/features/LoginRegisterUser";
 import { Suspense } from "@/layout";
 import { TOKEN } from "@/config";
+import Sidebar from "@/components/dasboard/sidebar/SideBar";
 
 export const Profile = () => {
   const loadingUser = useSelector(selectDashboardProfileLoading);
@@ -30,7 +30,7 @@ export const Profile = () => {
 
   return (
     <div className="flex mb-40 lg:mb-20">
-      <SideBar />
+      <Sidebar />
       <Suspense
         loading={loadingUser}
         error={errorUser}

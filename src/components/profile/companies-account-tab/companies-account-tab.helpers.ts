@@ -1,5 +1,4 @@
 import { IUser } from "@/features/LoginRegisterUser";
-import defaultAvatar from "@/assets/avatars/defaultAvatar.jpg";
 import * as yup from "yup";
 import CompaniesAccountValues from "./companies-account.types";
 
@@ -17,7 +16,6 @@ export const getCompanyAccountDefaultValuesHelper = (
   dir_calle: defaultValues?.dir_calle || "",
   dir_postal: defaultValues?.dir_postal || "",
   nacimiento: defaultValues?.nacimiento || "",
-  avatar: defaultValues?.avatar ?? defaultAvatar,
   descripcion: defaultValues?.descripcion || "",
   web_site: defaultValues?.web_site || "",
 });
@@ -39,7 +37,6 @@ export const getCompanyAccountResolverHelper = () =>
     dir_calle: yup.string().trim(),
     dir_postal: yup.string().trim(),
     nacimiento: yup.string().trim(),
-    avatar: yup.string().trim(),
     web_site: yup.string().trim(),
     descripcion: yup.string().trim(),
   });

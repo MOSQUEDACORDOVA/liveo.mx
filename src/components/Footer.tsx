@@ -25,7 +25,7 @@ export const Footer = () => {
       <img
         src={waveF}
         alt="waveF"
-        className="w-full -translate-y-[90%] -z-10"
+        className="w-full -translate-y-[90%] z-20 absolute"
         draggable={false}
       />
       <img

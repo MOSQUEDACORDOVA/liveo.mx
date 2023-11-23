@@ -1,32 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
-import { SideBar } from "../../components";
 import { CompaniesProfileContent } from "../../content";
-
 import { useSelector } from "react-redux";
-
 import {
-
   selectDashboardProfile,
   selectDashboardProfileError,
   selectDashboardProfileLoading,
-
 } from "@/features/LoginRegisterUser";
 import { Suspense } from "@/layout";
-
+import Sidebar from "@/components/dasboard/sidebar/SideBar";
 
 export const CompaniesProfile = () => {
   const loadingUser = useSelector(selectDashboardProfileLoading);
-
   const errorUser = useSelector(selectDashboardProfileError);
   const userInfo = useSelector(selectDashboardProfile);
 
-
-
-
   return (
     <div className="flex">
-      <SideBar />
+      <Sidebar />
       <Suspense
         loading={loadingUser}
         error={errorUser}

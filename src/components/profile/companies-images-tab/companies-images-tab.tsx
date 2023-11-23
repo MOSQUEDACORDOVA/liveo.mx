@@ -1,183 +1,91 @@
-import { Button, EmptyList, FileZone, Title } from "@/components";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useEffect, useState } from "react";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "@/features/store";
-import { deleteFile, setFile } from "@/features/HomeSlice";
-import { TOKEN } from "@/config";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Grid } from "@mui/material";
 import {
-  IUser,
-  getFiles,
-  selectDashboardProfile,
-  selectDashboardProfileFiles,
-  selectLoginInfo,
-} from "@/features/LoginRegisterUser";
-import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
-import { Paragraph } from "@/layout";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { IconButton, Modal } from "@mui/material";
-import {
+  useDeleteCompanyImageGallery,
+  useEditCompanyImageGalleryProfile,
   useEditCompanyProfile,
-  useGetUserProfile,
 } from "@/services/auth/auth.services.hooks";
+import FileZoneImageGalleryItem from "./filezone-image-gallery-item/filezone-image-gallery-item";
+import { IUser, selectDashboardProfile } from "@/features/LoginRegisterUser";
 
 const CompaniesImagesTab = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const [document, setDocument] = useState<File | null>(null);
-  const { mutateAsync: editCompanyProfile } = useEditCompanyProfile();
-  const login_info = useSelector(selectLoginInfo);
   const user = useSelector(selectDashboardProfile);
-  const Files = useSelector(selectDashboardProfileFiles);
-  console.log({ user, login_info });
+  const { mutateAsync: editCompanyProfile } = useEditCompanyProfile();
+  const { mutateAsync: editCompanyImageGalleryProfile } =
+    useEditCompanyImageGalleryProfile();
+  const { mutateAsync: deleteCompanyImageGallery } =
+    useDeleteCompanyImageGallery();
 
-  const onLoadDocument = (file: File) => {
-    setDocument(file);
+  const { imagen_principal_empresa: imageMainCompany } = user ?? {};
+  const { imagenes_empresa: companyImages } = user ?? {};
+
+  const handleEditCompanyImageGalleryProfile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { files } = event.target ?? {};
+    if (!files?.length) return;
+    await editCompanyImageGalleryProfile(files[0]);
   };
 
-  useEffect(() => {
-    dispatch(getFiles());
-  }, []);
-
-  const handleSendFile = async () => {
-    // document &&
-    //   dispatch(
-    //     setFile({
-    //       file: document,
-    //       token: getToken(),
-    //     })
-    //   )
-    //     .unwrap()
-    //     .then(() => dispatch(getFiles()).then(() => setDocument(null)));
-    console.log({ document });
-    if (document) {
-      await editCompanyProfile({
-        ...user,
-        imagen_principal_empresa: document,
-      } as IUser);
-    }
+  const handleEditCompanyProfile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { files } = event.target ?? {};
+    if (!files?.length) return;
+    const userData = {
+      ...user,
+      imagen_principal_empresa: files[0],
+    } as IUser;
+    await editCompanyProfile(userData);
   };
 
-  const handleNameFile = (url: string) => url.split("/").at(-1);
-
-  const handledeleteFile = async () =>
-    await dispatch(deleteFile(FileId))
-      .unwrap()
-      .then(() => setVerificationModal(false));
-
-  const handleOnDelete = (id: string) => {
-    setFileId(id);
-    setVerificationModal(true);
+  const handleDeleteGalleryImage = async (id?: number) => {
+    if (!id) return;
+    await deleteCompanyImageGallery(id);
   };
 
-  const [verificationModal, setVerificationModal] = useState(false);
-  const [FileId, setFileId] = useState("");
+  const handleDeleteMainImage = async () => {
+    const userData = {
+      ...user,
+      imagen_principal_empresa: "",
+    } as IUser;
+    await editCompanyProfile(userData);
+  };
 
   return (
-    <div className="flex flex-col gap-8 ">
+    <div
+      className="flex flex-col gap-8 xl:mb-96 overflow-y-auto lg:overflow-visible"
+      style={{ maxHeight: "100vh" }}
+    >
       <h5 className="font-semibold lg:text-left mb-2">Mi imagen</h5>
       <h6>Adjuntar imagen principal</h6>
-      <Modal
-        open={verificationModal}
-        onClose={() => setVerificationModal(false)}
-        className="flex justify-center items-center"
-      >
-        <div className="bg-white rounded-2xl relative p-6">
-          <IconButton
-            onClick={() => setVerificationModal(false)}
-            className="absolute right-2 top-2 z-10"
-          >
-            <CloseRoundedIcon />
-          </IconButton>
-          <div className="flex flex-col gap-6 m-6">
-            <Title
-              title="¿Quieres eliminar este archivo?"
-              Tag="h6"
-              color="light-violet"
-            />
-            <div className="flex gap-6">
-              <Button
-                classNameLink="min-w-[100px]"
-                bgColor="light-violet"
-                text="Borrar"
-                onClick={handledeleteFile}
-              />
-              <Button
-                classNameLink="min-w-[100px]"
-                bgColor="none"
-                text="Cancelar"
-                border
-                borderColor="light-violet"
-                textColor="light-violet"
-                onClick={() => setVerificationModal(false)}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal>
-      <div className="flex relative group flex-col gap-4 items-center justify-center h-52 border border-light-violet border-dashed p-6 rounded-xl w-full">
-        {document ? (
-          <>
-            <CheckCircleIcon className="w-14 h-14 text-green-500" />
-            <Title
-              title="Documento subido correctamente"
-              Tag="h5"
-              color="ocean"
-            />
-          </>
-        ) : (
-          <>
-            <CloudUploadIcon className="w-14 h-14 text-violet group-hover:animate-bounce" />
-            <Title
-              title="Subir documento"
-              Tag="h5"
-              color="ocean"
-              className="group-hover:animate-bounce delay-200"
-            />
-          </>
-        )}
-        <FileZone
-          onLoadFile={onLoadDocument}
-          name="documment"
-          accept=".doc,.docx, .pdf, application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        />
-      </div>
-      <Button
-        onClick={handleSendFile}
-        text="Guardar"
-        bgColor="light-violet"
-        classNameLink="w-20"
-        uppercase
-        disabled={!document}
+      <FileZoneImageGalleryItem
+        name="imagen_principal_empresa"
+        onChange={handleEditCompanyProfile}
+        document={imageMainCompany}
+        onlyEdit
       />
-
-      <ul className="flex gap-6 justify-start w-full flex-wrap">
-        {Files.length !== 0 ? (
-          Files.map((item) => (
-            <div key={item.id} className="relative">
-              <a
-                href={item.url}
-                className="flex flex-col w-32 p-4 bg-light-gray rounded-xl opacity-80 hover:opacity-100 hover:scale-105 duration-300"
-              >
-                <TaskRoundedIcon className="w-16 h-16 text-green-600 self-center" />
-                <Paragraph
-                  // eslint-disable-next-line no-irregular-whitespace
-                  children={`${handleNameFile(item.url)}  `}
-                  className="text-sm line-clamp-1"
-                />
-              </a>
-              <IconButton
-                onClick={() => handleOnDelete(item.id)}
-                className="absolute top-1 right-1 z-10"
-              >
-                <CloseRoundedIcon className="w-5 h-5" />
-              </IconButton>
-            </div>
-          ))
-        ) : (
-          <EmptyList message="Actualmente no tiene ningún archivo" />
-        )}
-      </ul>
+      <h6>Galería de fotografías</h6>
+      <Grid
+        container
+        rowSpacing={1}
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        {new Array(6).fill(undefined).map((_, index) => (
+          <Grid item xs={4} sm={4} md={4} key={index}>
+            <FileZoneImageGalleryItem
+              name={`file-image-${index}`}
+              onChange={handleEditCompanyImageGalleryProfile}
+              document={companyImages?.[index]?.url}
+              handleDelete={() =>
+                handleDeleteGalleryImage(companyImages?.[index]?.id)
+              }
+            />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };

@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useScrollToTop } from "@/hook";
-import { SideBar } from "../../components";
 import { SuscriptionContent } from "../../content";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/features/store";
 import { Suspense } from "@/layout";
 import { getBys, selectBysError, selectBysLoading } from "@/features/Service";
+import Sidebar from "@/components/dasboard/sidebar/SideBar";
 
 export const Suscription = () => {
   const loading = useSelector(selectBysLoading);
@@ -21,7 +21,7 @@ export const Suscription = () => {
 
   return (
     <div className="flex">
-      <SideBar />
+      <Sidebar />
       <Suspense
         loading={loading}
         error={error}

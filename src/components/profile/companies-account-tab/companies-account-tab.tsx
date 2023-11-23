@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Button, FileZone } from "@/components";
 import { INPUTLABELS, INPUTNAMES } from "@/utils";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { IUser, selectDashboardProfile } from "@/features/LoginRegisterUser";
 import { Divider } from "@mui/material";
 import { useForm } from "react-hook-form";
 import TextField from "@/components/material_ui/text-field/text-field";
+import defaultAvatar from "@/assets/avatars/defaultAvatar.jpg";
 import {
   getCompanyAccountDefaultValuesHelper,
   getCompanyAccountResolverHelper,
@@ -19,6 +20,8 @@ import { useEditCompanyProfile } from "@/services/auth/auth.services.hooks";
 
 const CompaniesAccountTab = () => {
   const userInfo = useSelector(selectDashboardProfile);
+  const { avatar: userAvatar = "" } = userInfo ?? {};
+  const [avatar, setAvatar] = useState<File | string>(userAvatar);
 
   const { mutateAsync: editCompanyProfile } = useEditCompanyProfile();
   const form = useForm<CompaniesAccountValues>({
@@ -29,18 +32,19 @@ const CompaniesAccountTab = () => {
     ),
   });
 
-  const { register, formState, handleSubmit, setValue } = form;
-  const { watch } = form;
+  const { register, formState, handleSubmit } = form;
   const { errors } = formState;
-  const { avatar } = watch();
 
-  const onLoadImage = useCallback((file: File) => {
-    const urlFile = URL.createObjectURL(file);
-    setValue("avatar", urlFile);
-  }, []);
+  const urlAvatar = useMemo(() => {
+    if (!avatar) return defaultAvatar;
+    if (typeof avatar === "string") return avatar;
+    return URL.createObjectURL(avatar);
+  }, [avatar]);
+
+  const onLoadImage = useCallback((file: File) => setAvatar(file), []);
 
   const onSubmit = async (values: CompaniesAccountValues) => {
-    await editCompanyProfile({ ...(userInfo as IUser), ...values });
+    await editCompanyProfile({ ...userInfo, ...values, avatar } as IUser);
   };
 
   return (
@@ -56,7 +60,7 @@ const CompaniesAccountTab = () => {
         <div className="relative shrink-0 w-36 h-36 mx-auto">
           <FileZone onLoadFile={onLoadImage} name="profileAvatar" />
           <img
-            src={avatar}
+            src={urlAvatar}
             alt="avatar"
             className="rounded-full w-full h-full object-cover"
           />

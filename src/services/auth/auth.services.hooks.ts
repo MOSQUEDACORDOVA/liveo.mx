@@ -5,6 +5,8 @@ import {
   EditCompanyProfile as editCompanyProfile,
   selectIsLogged,
   IUser,
+  EditImageGalleryCompanyProfile as editImageGalleryCompanyProfile,
+  DeleteImageGalleryCompanyProfile as deleteImageGalleryCompanyProfile,
 } from "@/features/LoginRegisterUser";
 import { useMutation, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,6 +57,24 @@ export const useEditCompanyProfile = () => {
 
   return useMutation(async (data: IUser) => {
     const response = await dispatch(editCompanyProfile(data));
+    return response.payload;
+  });
+};
+
+export const useEditCompanyImageGalleryProfile = () => {
+  const dispatch = useDispatch<any>();
+
+  return useMutation(async (file: File) => {
+    const response = await dispatch(editImageGalleryCompanyProfile(file));
+    return response.payload;
+  });
+};
+
+export const useDeleteCompanyImageGallery = () => {
+  const dispatch = useDispatch<any>();
+
+  return useMutation(async (id: number) => {
+    const response = await dispatch(deleteImageGalleryCompanyProfile(id));
     return response.payload;
   });
 };
