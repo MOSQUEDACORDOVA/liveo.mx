@@ -6,7 +6,7 @@ import {
   selectDashboardProfileLoading,
 } from "@/features/LoginRegisterUser";
 import { Suspense } from "@/layout";
-import Sidebar from "@/components/dasboard/sidebar/SideBar";
+import Sidebar from "@/components/dasboard/sidebar/sidebar";
 
 export const CompaniesProfile = () => {
   const loadingUser = useSelector(selectDashboardProfileLoading);

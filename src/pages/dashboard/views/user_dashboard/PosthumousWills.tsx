@@ -2,7 +2,7 @@
 import { useScrollToTop } from "@/hook";
 import { PosthumousWillsContent } from "../../content";
 import { useEffect } from "react";
-import Sidebar from "@/components/dasboard/sidebar/SideBar";
+import Sidebar from "@/components/dasboard/sidebar/sidebar";
 
 export const PosthumousWills = () => {
   const { handleScrollToTop } = useScrollToTop();

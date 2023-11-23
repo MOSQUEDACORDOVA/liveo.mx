@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/features/store";
 import { Suspense } from "@/layout";
 import { getBys, selectBysError, selectBysLoading } from "@/features/Service";
-import Sidebar from "@/components/dasboard/sidebar/SideBar";
+import Sidebar from "@/components/dasboard/sidebar/sidebar";
 
 export const Suscription = () => {
   const loading = useSelector(selectBysLoading);

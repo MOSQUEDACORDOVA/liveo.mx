@@ -13,7 +13,7 @@ import {
 } from "@/features/LoginRegisterUser";
 import { Suspense } from "@/layout";
 import { TOKEN } from "@/config";
-import Sidebar from "@/components/dasboard/sidebar/SideBar";
+import Sidebar from "@/components/dasboard/sidebar/sidebar";
 
 export const Profile = () => {
   const loadingUser = useSelector(selectDashboardProfileLoading);

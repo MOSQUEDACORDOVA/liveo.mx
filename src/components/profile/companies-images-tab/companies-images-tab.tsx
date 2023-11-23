@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import {
@@ -43,14 +42,6 @@ const CompaniesImagesTab = () => {
   const handleDeleteGalleryImage = async (id?: number) => {
     if (!id) return;
     await deleteCompanyImageGallery(id);
-  };
-
-  const handleDeleteMainImage = async () => {
-    const userData = {
-      ...user,
-      imagen_principal_empresa: "",
-    } as IUser;
-    await editCompanyProfile(userData);
   };
 
   return (
