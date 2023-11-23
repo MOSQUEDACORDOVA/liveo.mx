@@ -1,4 +1,5 @@
 import { PathNames } from "@/config";
+import { IUserRoles } from "@/features/LoginRegisterUser";
 import {
   DashboardIcon,
   HelpIcon,
@@ -48,3 +49,24 @@ export const LinksSidebarData = [
     icon: <HelpIcon />,
   },
 ];
+
+const sectionsCompany = ["Dashboard", "Mi empresa", "Notificaciones", "Ayuda"];
+const sectionsDefault = [
+  "Dashboard",
+  "Mis suscripciones",
+  "Voluntades postumas",
+  "Mi perfil",
+  "Notificaciones",
+  "Ayuda",
+];
+
+export const getLinksSidebar = (roles?: IUserRoles[]) => {
+  const isCompany = roles?.filter((role) => role.name === "company");
+
+  if (isCompany)
+    return LinksSidebarData.filter((item) =>
+      sectionsCompany.includes(item.name)
+    );
+
+  return LinksSidebarData.filter((item) => sectionsDefault.includes(item.name));
+};

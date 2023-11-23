@@ -13,6 +13,5 @@ export default interface CompaniesAccountValues {
   dir_postal?: string;
   nacimiento?: string | Dayjs;
   web_site?: string;
-  avatar?: string;
   descripcion?: string;
 }

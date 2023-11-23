@@ -10,3 +10,12 @@ export interface RegisteredCompanyRequest {
   password: string;
   privacy?: boolean;
 }
+
+export interface CompanyImage {
+  created_at: string;
+  id: number;
+  tipo?: string;
+  updated_at: string;
+  url: string;
+  user_id: string;
+}

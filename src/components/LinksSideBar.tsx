@@ -1,11 +1,17 @@
-import { LinksSidebar } from "@/data";
+import { getLinksSidebar } from "@/data";
+import { selectDashboardProfile } from "@/features/LoginRegisterUser";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 export const LinksSideBar = ({ onClick }: { onClick?: () => void }) => {
+  const user = useSelector(selectDashboardProfile);
   const path = useLocation().pathname;
+
+  const { roles } = user ?? {};
+
   return (
     <ul className="flex flex-col gap-1 my-2 lg:mt-8">
-      {LinksSidebar.map((item, index) => (
+      {getLinksSidebar(roles).map((item, index) => (
         <Link
           onClick={onClick}
           to={item.href}
