@@ -33,7 +33,7 @@ const FILE_NAMES = {
   FORMAT: "formato",
 } as const;
 
-export const DocumentTab = () => {
+const UserDocumentsTab = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [document, setDocument] = useState<File | null>(null);
   const testament = useSelector(selectTestamentInfo);
@@ -370,3 +370,5 @@ export const DocumentTab = () => {
     </div>
   );
 };
+
+export default UserDocumentsTab;

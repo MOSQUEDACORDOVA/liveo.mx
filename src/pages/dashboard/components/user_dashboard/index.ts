@@ -7,6 +7,4 @@ export { VaultTab } from "./VaultTab";
 export { NewWill } from "./NewWill";
 export { EditWill } from "./EditWill";
 export { ListPosthumousWill } from "./ListPosthumousWill";
-export { DocumentTab } from "./DocumentTab";
 export { CompaniesProfileTabs } from "./CompaniesProfileTabs";
-export { CompanieImagenTab } from "./CompanieImagenTab";

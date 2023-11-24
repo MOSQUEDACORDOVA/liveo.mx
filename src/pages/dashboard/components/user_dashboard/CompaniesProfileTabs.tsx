@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DocumentTab, CompanieImagenTab } from ".";
 import { ITABSID, TABSID } from "@/utils";
 import { useSelector } from "react-redux";
 import { selectDashboardProfileActiveTab } from "@/features/LoginRegisterUser";
@@ -8,6 +7,8 @@ import CompaniesServiceTab from "@/components/profile/companies-service-tab/comp
 import CompaniesSocialMediaTab from "@/components/profile/companies-social-media-tab/companies-social-media-tab";
 import { CompaniesFaqTab } from "@/components/profile/companies-faq-tab/companies-faq-tab";
 import CompaniesLocationsTab from "@/components/profile/companies-locations-tab/companies-locations-tab";
+import UserDocumentsTab from "@/components/profile/user-documents-tab/user-documents-tab";
+import CompaniesImagesTab from "@/components/profile/companies-images-tab/companies-images-tab";
 
 const Tabs = [
   { name: "Mi empresa", tab: TABSID.ACCOUNT_PROFILE },
@@ -28,8 +29,8 @@ export const CompaniesProfileTabs = () => {
 
   const handleShowTabsContent = () => {
     if (tab === TABSID.ACCOUNT_PROFILE) return <CompaniesAccountTab />;
-    if (tab === TABSID.COMPANIE_IMAGEN) return <CompanieImagenTab />;
-    if (tab === TABSID.DOCUMENTS_PROFILE) return <DocumentTab />;
+    if (tab === TABSID.COMPANIE_IMAGEN) return <CompaniesImagesTab />;
+    if (tab === TABSID.DOCUMENTS_PROFILE) return <UserDocumentsTab />;
     if (tab === TABSID.VAULT) return <CompaniesServiceTab />;
     if (tab === TABSID.LOCATIONS_PROFIILE) return <CompaniesLocationsTab />;
     if (tab === TABSID.AUT_PERSON_PROFILE) return <CompaniesSocialMediaTab />;
