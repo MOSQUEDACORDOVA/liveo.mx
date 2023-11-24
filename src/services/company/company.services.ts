@@ -10,7 +10,9 @@ export const registerCompany = async (data: RegisteredCompanyRequest) => {
 
     const response = await fetch(`${API}/empresas`, {
       method: "POST",
-      headers: HEADERAUTH(getToken()),
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(body),
     });
     const result = await response.json();
