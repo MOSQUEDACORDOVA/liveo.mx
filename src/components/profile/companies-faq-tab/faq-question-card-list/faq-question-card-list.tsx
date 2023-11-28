@@ -8,7 +8,7 @@ const FaqQuestionCardList: FC<Props> = (props) => {
   return (
     <Grid className="faq-questions-card-list px-4" container spacing={3}>
       {questions.map((question) => (
-        <Grid item xs={6} key={question.id}>
+        <Grid item xs={12} sm={6} key={question.id}>
           <FaqQuestionCard question={question} />
         </Grid>
       ))}
