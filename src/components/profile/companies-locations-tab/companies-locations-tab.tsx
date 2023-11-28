@@ -37,10 +37,7 @@ const CompaniesLocationsTab = () => {
   };
 
   return (
-    <div
-      className="companies-locations flex flex-col gap-8"
-      style={{ maxHeight: "80vh", overflowY: "auto" }}
-    >
+    <div className="companies-locations flex flex-col gap-8">
       <h5 className="font-semibold lg:text-left mb-2">Ubicaciones</h5>
       <form id="companyLocationsForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid md:grid-cols-1 gap-4 overflow-y-auto">

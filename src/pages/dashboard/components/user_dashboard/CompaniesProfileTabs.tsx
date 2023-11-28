@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { ITABSID, TABSID } from "@/utils";
 import { useSelector } from "react-redux";
-import { selectDashboardProfileActiveTab } from "@/features/LoginRegisterUser";
+import {
+  selectDashboardProfileActiveTab,
+  selectDashboardProfileError,
+  selectDashboardProfileLoading,
+} from "@/features/LoginRegisterUser";
 import CompaniesAccountTab from "@/components/profile/companies-account-tab/companies-account-tab";
 import CompaniesServiceTab from "@/components/profile/companies-service-tab/companies-service-tab";
 import CompaniesSocialMediaTab from "@/components/profile/companies-social-media-tab/companies-social-media-tab";
@@ -9,6 +13,7 @@ import { CompaniesFaqTab } from "@/components/profile/companies-faq-tab/companie
 import CompaniesLocationsTab from "@/components/profile/companies-locations-tab/companies-locations-tab";
 import UserDocumentsTab from "@/components/profile/user-documents-tab/user-documents-tab";
 import CompaniesImagesTab from "@/components/profile/companies-images-tab/companies-images-tab";
+import { Suspense } from "@/layout";
 
 const Tabs = [
   { name: "Mi empresa", tab: TABSID.ACCOUNT_PROFILE },
@@ -20,6 +25,8 @@ const Tabs = [
 ] as const;
 
 export const CompaniesProfileTabs = () => {
+  const loadingUser = useSelector(selectDashboardProfileLoading);
+  const errorUser = useSelector(selectDashboardProfileError);
   const activeTab = useSelector(selectDashboardProfileActiveTab);
   const [tab, setTab] = useState<ITABSID>(activeTab ?? TABSID.ACCOUNT_PROFILE);
 
@@ -57,7 +64,16 @@ export const CompaniesProfileTabs = () => {
           </li>
         ))}
       </ul>
-      <div className="">{handleShowTabsContent()}</div>
+      <div className="">
+        <Suspense
+          loading={loadingUser}
+          error={errorUser}
+          errorMessage="No pudimos cargar su perfil"
+          className="w-full pb-40 xl:pb-96 min-h-[100vh] overflow-y-auto"
+        >
+          {handleShowTabsContent()}
+        </Suspense>
+      </div>
     </div>
   );
 };

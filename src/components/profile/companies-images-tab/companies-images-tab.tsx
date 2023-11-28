@@ -45,10 +45,7 @@ const CompaniesImagesTab = () => {
   };
 
   return (
-    <div
-      className="flex flex-col gap-8 xl:mb-96 overflow-y-auto lg:overflow-visible"
-      style={{ maxHeight: "100vh" }}
-    >
+    <div className="flex flex-col gap-8 overflow-y-auto lg:overflow-visible">
       <h5 className="font-semibold lg:text-left mb-2">Mi imagen</h5>
       <h6>Adjuntar imagen principal</h6>
       <FileZoneImageGalleryItem
