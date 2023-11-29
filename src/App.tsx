@@ -39,6 +39,7 @@ import RegisterCompaniesPage from "./pages/companies/registered/registered";
 import { useGetUserProfile } from "./services/auth/auth.services.hooks";
 import { useValidateInactive } from "./hook/useValidateInactive";
 import "react-toastify/dist/ReactToastify.css";
+import NotariesPage from "./pages/notaries/notaries";
 
 export const App = () => {
   const { isLoading } = useGetUserProfile();
@@ -112,6 +113,8 @@ const router = createHashRouter(
           element={<RegisterCompaniesPage />}
         />
 
+        <Route path={path.notaries} element={<NotariesPage />} />
+
         <Route element={<PrivateRouteUserDashboard />}>
           <Route path={path.private.profile} element={<Profile />} />
           <Route path={path.companyProfile} element={<CompaniesProfile />} />
@@ -129,6 +132,7 @@ const router = createHashRouter(
               element={<EditWill />}
             />
           </Route>
+          R
         </Route>
 
         <Route path={path.companies} element={<CompaniesPage />} />
