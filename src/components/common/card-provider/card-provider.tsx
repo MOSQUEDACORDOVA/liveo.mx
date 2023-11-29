@@ -1,27 +1,14 @@
+import { FC } from "react";
 import defaultImageCard from "@/assets/cards/proove_abogado+.png";
 import defaultImageCardLogo from "@/assets/cards/logo_nurytanatologa.png";
 import defaultCompaniesLogo from "@/assets/companies/+CLIENTES_ICON.png";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import { CardProviderProps as Props } from "./card-provider.types";
 
-type IProps = {
-  icon?: JSX.Element;
-  name: string;
-  logo?: string | null;
-  image?: string | null;
-  category_name?: string | null;
-  category_logo?: string | null;
-  className?: string | null;
-};
+const CardProviders: FC<Props> = (props) => {
+  const { name, category_logo, category_name, image, logo, icon, className } =
+    props;
 
-export const CardProviders = ({
-  name,
-  category_logo,
-  category_name,
-  image,
-  logo,
-  icon,
-  className,
-}: IProps) => {
   return (
     <div className="snap-start px-2 shrink-0 self-center cursor-pointer">
       <div
@@ -61,3 +48,5 @@ export const CardProviders = ({
     </div>
   );
 };
+
+export default CardProviders;
