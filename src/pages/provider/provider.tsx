@@ -1,20 +1,18 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import BannerGrid from "@/components/notary/banner-grid/banner-grid";
 import {
   BadgeOutlined,
-  DoNotStep,
   FavoriteBorderOutlined,
   FiberManualRecordRounded,
   PhoneAndroidOutlined,
 } from "@mui/icons-material";
-import { FormControl, FormGroup, Grid, InputLabel } from "@mui/material";
+import { Grid } from "@mui/material";
 import TextField from "@/components/material_ui/text-field/text-field";
-import { TextArea } from "@/components/material_ui";
 import { Button } from "@/components";
 
 const ProviderPage = () => {
-  const { id } = useParams();
-  console.log({ id });
+  // TODO: DISCLAIM THIS WHEN THE PAGE IS READY
+  // const { id } = useParams();
 
   return (
     <div className="notary-page overflow-hidden p-6 gap-16 md:mb-[40rem] max-w-6xl m-auto">
