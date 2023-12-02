@@ -9,10 +9,10 @@ export const HomePage = () => {
 
   return (
     <div className="overflow-hidden">
-      <Welcome />
-      <Services />
+      {/* <Welcome /> */}
+      {/* {/* <Services /> */}
       <Vault />
-      <WhyChoose />
+      {/* <WhyChoose /> */}
     </div>
   );
 };
