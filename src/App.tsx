@@ -132,7 +132,6 @@ const router = createHashRouter(
               element={<EditWill />}
             />
           </Route>
-          R
         </Route>
 
         <Route path={path.companies} element={<CompaniesPage />} />
