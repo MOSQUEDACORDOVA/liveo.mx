@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useScrollToTop } from "@/hook";
-import { SideBar } from "../../components";
 import { PosthumousWillsContent } from "../../content";
 import { useEffect } from "react";
+import Sidebar from "@/components/dasboard/sidebar/sidebar";
 
 export const PosthumousWills = () => {
   const { handleScrollToTop } = useScrollToTop();
@@ -11,7 +11,7 @@ export const PosthumousWills = () => {
 
   return (
     <div className="flex">
-      <SideBar />
+      <Sidebar />
       <div className="p-12 w-full">
         <PosthumousWillsContent />
       </div>

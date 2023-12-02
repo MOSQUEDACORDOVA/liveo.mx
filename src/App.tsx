@@ -23,7 +23,6 @@ import {
   Term,
   PrivacyPolicy,
   CompaniesPage,
-  RegisterCompanies,
   Suscription,
   PosthumousWills,
   ReactiveAccount,
@@ -34,12 +33,23 @@ import { PrivateRouteUserDashboard } from "./private/Private";
 import { useDispatch, useSelector } from "react-redux";
 import { selectShowNavMobile, showNavMobile } from "./features/NavBarSlice";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { EditWill, NewWill } from "./pages/dashboard/components";
 import { ReportDeceased } from "./components/ReportDeceased";
-import Notaries from "./pages/notaries";
+import RegisterCompaniesPage from "./pages/companies/registered/registered";
+import { useGetUserProfile } from "./services/auth/auth.services.hooks";
+import { useValidateInactive } from "./hook/useValidateInactive";
+import "react-toastify/dist/ReactToastify.css";
+import NotariesPage from "./pages/notaries/notaries";
 
-export const App = () => <RouterProvider router={router} />;
+export const App = () => {
+  const { isLoading } = useGetUserProfile();
+  useValidateInactive();
+
+  if (isLoading) return <div></div>;
+
+  return <RouterProvider router={router} />;
+};
+
 const Root = () => {
   const dispatch = useDispatch();
   const showNavBarMobile = useSelector(selectShowNavMobile);
@@ -98,8 +108,12 @@ const router = createHashRouter(
 
         <Route path={path.subscriptions} element={<SuscriptionPage />} />
 
-        <Route path={path.register_companie} element={<RegisterCompanies />} />
-        <Route path={path.notaries} element={<Notaries />} />
+        <Route
+          path={path.register_companie}
+          element={<RegisterCompaniesPage />}
+        />
+
+        <Route path={path.notaries} element={<NotariesPage />} />
 
         <Route element={<PrivateRouteUserDashboard />}>
           <Route path={path.private.profile} element={<Profile />} />
@@ -118,7 +132,6 @@ const router = createHashRouter(
               element={<EditWill />}
             />
           </Route>
-          Ro
         </Route>
 
         <Route path={path.companies} element={<CompaniesPage />} />

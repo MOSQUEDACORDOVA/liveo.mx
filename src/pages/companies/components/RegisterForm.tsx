@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import ribbon from "@/assets/waves/onda_slide.png";
 import logo from "@/assets/login-register/logo_login.png";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -24,7 +23,10 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full md:w-[550px] bg-white relative p-10 shrink-0" style={{ maxHeight: '100vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+    <div
+      className="w-full md:w-[550px] bg-white relative p-10 shrink-0"
+      style={{ maxHeight: "100vh", overflowY: "scroll", overflowX: "hidden" }}
+    >
       <img
         src={ribbon}
         alt="ribbon"
@@ -47,7 +49,7 @@ export const RegisterForm = () => {
           className="ml-1.5 mt-2"
         />
       </header>
-      <Box component="form" className="relative my-10 flex flex-col gap-5" >
+      <Box component="form" className="relative my-10 flex flex-col gap-5">
         <TextField
           onInputUpdated={handleChangeInputs}
           label={INPUTLABELS.NAME_COMPANIE}

@@ -2,5 +2,5 @@ import { IUser } from "@/features/LoginRegisterUser";
 
 type IPROFILEDATA = Omit<
   IUser,
-  "id" | "roles" | "estado" | "vivo" | "liberacion"
+  "roles" | "estado" | "vivo" | "liberacion" | "tags" | "imagenes_empresa"
 >;

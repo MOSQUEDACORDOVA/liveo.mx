@@ -3,6 +3,7 @@ import { RootState } from "./store";
 import { API, HEADERAUTH } from "@/config";
 import {
   TOKEN,
+  getToken,
   setItemLocalStorage,
   storage_names,
   user,
@@ -11,8 +12,9 @@ import { IPROFILEDATA } from "@/types";
 import { toast } from "react-toastify";
 import dayjs, { Dayjs } from "dayjs";
 import { ITABSID } from "@/utils";
+import { CompanyImage } from "@/types/company.types";
 
-type IUserRoles = {
+export type IUserRoles = {
   id: number;
   name: string;
   guard_name: string;
@@ -21,13 +23,13 @@ type IUserRoles = {
   pivot: { model_id: number; role_id: number; model_type: string };
 };
 
-export type IUser = {
-  id: number;
+export interface IUser {
+  id?: number;
   name?: string | null;
   apellido?: string | null;
   email?: string | null;
   password?: string | null;
-  avatar?: string;
+  avatar?: File | string;
   estado?: string | null;
   telefono?: string | null;
   celular?: string | null;
@@ -37,10 +39,21 @@ export type IUser = {
   dir_pais?: string | null;
   dir_postal?: string | null;
   nacimiento?: string | null | Dayjs;
-  roles: IUserRoles[];
+  roles?: IUserRoles[];
+  sector?: string;
+  tipo_sector?: string;
+  tags?: string[];
   vivo: number;
   liberacion: number;
-};
+  url_facebook?: string;
+  url_instagram?: string;
+  url_tiktok?: string;
+  iframe_google?: string;
+  imagen_principal_empresa?: any;
+  imagenes_empresa: CompanyImage[];
+  descripcion?: string;
+  web_site?: string;
+}
 
 type ILogin = {
   msg: string;
@@ -100,12 +113,13 @@ export const LoginData = createAsyncThunk(
       body: JSON.stringify(data),
     }).then((resp) => resp.json());
     if (response.user) {
-      if (response.user.estado === "Activo") {
-        setItemLocalStorage(storage_names.token, response.token);
-        setItemLocalStorage(storage_names.user, response.user.estado);
-        thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
-        thunkAPI.dispatch(getUserProfile(response.token));
-      }
+      // TODO: Remove this comment when the backend is ready
+      // if (response.user.estado !== "Activo")
+      //   throw new Error("Usuario no activo");
+      setItemLocalStorage(storage_names.token, response.token);
+      setItemLocalStorage(storage_names.user, response.user.estado);
+      thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
+      thunkAPI.dispatch(getUserProfile(response.token));
     }
     return response;
   }
@@ -145,16 +159,127 @@ export const EditProfile = createAsyncThunk(
   }
 );
 
+export const EditCompanyProfile = createAsyncThunk(
+  "LoginRegisterUser/EditProfile",
+  async (data: IUser, thunkAPI) => {
+    const { avatar, imagen_principal_empresa, id } = data;
+    const { tags } = data;
+    const { LoginRegister } = thunkAPI.getState() as RootState;
+    const newData = {
+      ...data,
+      tags: JSON.stringify(tags),
+    };
+    delete newData["password"];
+    const response = await fetch(`${API}/empresas/${id}`, {
+      method: "POST",
+      headers: HEADERAUTH(LoginRegister.Login.info?.token ?? TOKEN),
+      body: JSON.stringify(newData),
+    }).then(async () => {
+      if (avatar && typeof avatar !== "string") {
+        await thunkAPI.dispatch(setAvatarCompany(avatar)).unwrap();
+      }
+
+      if (
+        imagen_principal_empresa &&
+        typeof imagen_principal_empresa !== "string"
+      ) {
+        await thunkAPI
+          .dispatch(setPrincipalImageCompany(imagen_principal_empresa))
+          .unwrap();
+      }
+
+      await thunkAPI
+        .dispatch(getUserProfile(LoginRegister.Login.info?.token ?? TOKEN))
+        .unwrap()
+        .then((resp) => resp);
+    });
+    return response;
+  }
+);
+
+export const EditImageGalleryCompanyProfile = createAsyncThunk(
+  "LoginRegisterUser/EditProfile",
+  async (file: File, thunkAPI) => {
+    const form = new FormData();
+    form.append("img", file);
+    const { LoginRegister } = thunkAPI.getState() as RootState;
+    const response = await fetch(`${API}/empresas-img`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: form,
+    }).then(async () => {
+      await thunkAPI
+        .dispatch(getUserProfile(LoginRegister.Login.info?.token ?? TOKEN))
+        .unwrap()
+        .then((resp) => resp);
+    });
+    return response;
+  }
+);
+
+export const DeleteImageGalleryCompanyProfile = createAsyncThunk(
+  "LoginRegisterUser/EditProfile",
+  async (id: number, thunkAPI) => {
+    const response = await fetch(`${API}/empresas-img/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }).then(async () => {
+      await thunkAPI
+        .dispatch(getUserProfile(getToken()))
+        .unwrap()
+        .then((resp) => resp);
+    });
+    return response;
+  }
+);
+
 export const setAvatar = createAsyncThunk(
   "LoginRegisterUser/setAvatar",
-  async (data: File, thunkAPI) => {
-    const { LoginRegister } = thunkAPI.getState() as RootState;
+  async (data: File) => {
     const formData = new FormData();
     formData.append("avatar", data);
     await fetch(`${API}/subir-avatar`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LoginRegister.Login.info?.token ?? TOKEN}`,
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: formData,
+    }).then((resp) => resp.json());
+  }
+);
+
+export const setAvatarCompany = createAsyncThunk(
+  "LoginRegisterUser/setAvatarCompany",
+  async (data: File, thunkAPI) => {
+    const { LoginRegister } = thunkAPI.getState() as RootState;
+    const userId = LoginRegister.DashboardProfile.info?.id;
+    const formData = new FormData();
+    formData.append("avatar", data);
+    await fetch(`${API}/empresas/${userId}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: formData,
+    }).then((resp) => resp.json());
+  }
+);
+
+export const setPrincipalImageCompany = createAsyncThunk(
+  "LoginRegisterUser/setPrincipalImageCompany",
+  async (data: File, thunkAPI) => {
+    const { LoginRegister } = thunkAPI.getState() as RootState;
+    const userId = LoginRegister.DashboardProfile.info?.id;
+    const formData = new FormData();
+    formData.append("imagen_principal", data);
+    await fetch(`${API}/empresas/${userId}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
       },
       body: formData,
     }).then((resp) => resp.json());
@@ -297,11 +422,17 @@ export const deleteAuthPerson = createAsyncThunk(
 
 export const getUserProfile = createAsyncThunk(
   "LoginRegisterUser/getUserProfile",
-  async (token: string) => {
+  async (token: string, thunkAPI) => {
     const response = await fetch(`${API}/perfil`, {
       headers: HEADERAUTH(token),
-    }).then((res) => res.json());
-
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const { data } = res;
+        const tags = data.tags ? JSON.parse(data.tags) : [];
+        return { ...data, tags };
+      });
+    thunkAPI.dispatch(LoginRegisterUser.actions.setLogged(true));
     return response;
   }
 );

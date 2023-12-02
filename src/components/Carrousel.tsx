@@ -2,8 +2,8 @@ import { IconButton } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { useEffect, useRef, useState } from "react";
-import { CardProviders } from "@/pages";
 import { IEmpresas } from "@/features/Empresas";
+import CardProviders from "./common/card-provider/card-provider";
 
 export const Carrousel = ({ options }: { options: IEmpresas[] }) => {
   const carrousel_ref = useRef<HTMLDivElement>(null);

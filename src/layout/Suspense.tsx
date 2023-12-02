@@ -37,7 +37,7 @@ declare module "@mui/material/LinearProgress" {
 
 type IProps = {
   type?: "circular" | "linear";
-  loading: boolean;
+  loading?: boolean;
   error?: boolean;
   errorMessage?: string;
   children?: React.ReactNode;
@@ -48,7 +48,7 @@ export const Suspense = ({
   children,
   error,
   errorMessage,
-  loading,
+  loading = false,
   type = "linear",
   className,
 }: IProps) => {

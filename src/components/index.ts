@@ -1,6 +1,6 @@
 export { NavBar } from "./NavBar";
 export { Links } from "./Links";
-export { Button } from "./Button";
+export { Button } from "./material_ui/button/button";
 export { NavBarMobile } from "./NavBarMobile";
 export { SectionHeader } from "./SectionHeader";
 export { PartOfServices } from "./PartOfServices";
@@ -16,7 +16,7 @@ export { Dots } from "./Dots";
 export { Sanitize } from "./Sanitize";
 export { LinksSideBar } from "./LinksSideBar";
 export { TopHeader } from "./TopHeader";
-export { Accordion } from "./Accordion";
+export { Accordion } from "./material_ui/accordion/accordion";
 export { Gallery } from "./Gallery";
 export { Tabs } from "./Tabs";
 export { Title } from "./Title";
