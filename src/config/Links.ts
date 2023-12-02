@@ -7,6 +7,7 @@ export const PathNames = {
   blog: "/blog",
   account: "/cuenta",
   notaries: "/notarias",
+  notary: "/notarias/:id",
   privacy: "/aviso-de-privacidad",
   terms: "/terminos-y-condiciones",
   help: "/ayuda",
@@ -34,7 +35,6 @@ export const PathNames = {
     dashboard: "/dashboard",
     subscriptions: "/mis-suscripciones",
     profile: "/perfil",
-    
     notifications: "/notificaciones",
     closeSession: "/",
     posthumous_wills: "/voluntades-postumas",
