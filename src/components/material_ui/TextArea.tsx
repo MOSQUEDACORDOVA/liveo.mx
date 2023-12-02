@@ -1,30 +1,16 @@
-import { TextareaAutosize } from "@mui/material";
+import { TextareaAutosize, TextareaAutosizeProps } from "@mui/material";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface Props {
+interface Props extends TextareaAutosizeProps {
   required?: boolean;
   name: string;
-  className?: string;
   clear?: boolean;
   onInputUpdated?: (name: string, value: any) => void;
-  value?: string | null | undefined;
-  minRows?: number;
-  maxRows?: number;
-  placeholder?: string;
 }
 export function TextArea({ ...props }: Props) {
-  const {
-    clear,
-    required,
-    onInputUpdated,
-    name,
-    className,
-    value,
-    minRows,
-    maxRows,
-    placeholder,
-  } = props;
+  const { clear, required, onInputUpdated, name, className, value, ...rest } =
+    props;
   const initialValue = {
     value: "",
     name,
@@ -37,7 +23,7 @@ export function TextArea({ ...props }: Props) {
   }, [data, clear]);
 
   useEffect(() => {
-    value && setData((prev) => ({ ...prev, value }));
+    value && setData((prev) => ({ ...prev, value: value as string }));
   }, [value]);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,10 +40,7 @@ export function TextArea({ ...props }: Props) {
       onChange={handleChange}
       value={data.value}
       required={required ?? false}
-      name={name}
-      minRows={minRows}
-      maxRows={maxRows}
-      placeholder={placeholder}
+      {...rest}
     />
   );
 }

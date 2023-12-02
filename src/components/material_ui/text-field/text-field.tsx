@@ -19,7 +19,7 @@ const TextField: FC<TextFieldProps> = forwardRef((props, ref) => {
     <MuiTextField
       disabled={disabled}
       className={className}
-      sx={{ borderRadius: 50 }}
+      sx={{ borderRadius: 10 }}
       fullWidth
       required={required ?? false}
       label={label}

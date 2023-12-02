@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useScrollToTop } from "@/hook";
-import { Services, Vault, Welcome, WhyChoose } from "./components";
+import { Vault } from "./components";
 import { useEffect } from "react";
 
 export const HomePage = () => {
