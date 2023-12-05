@@ -2,10 +2,12 @@ import { CloseRounded, TuneOutlined } from "@mui/icons-material";
 import { Box, IconButton, Modal } from "@mui/material";
 import { useState } from "react";
 import MenuDisplay from "../menu-display/menu-display";
-import { getCategoriesMenus } from "./filter-notaries.helpers";
+import { useGetCategoriesServices } from "@/services/company/company.services.hooks";
 
 const FilterNotaries = () => {
   const [open, setOpen] = useState(false);
+
+  const { data } = useGetCategoriesServices();
 
   const onClose = () => setOpen(false);
 
@@ -38,11 +40,12 @@ const FilterNotaries = () => {
           </IconButton>
           <h3 className="text-violet font-bold my-4">Filtrar</h3>
           <div>
-            {getCategoriesMenus().map((item) => (
+            {data?.map((item) => (
               <MenuDisplay
                 key={item.id}
-                title={item.title}
-                items={item.items}
+                title={item.name}
+                // TODO: uncomment when the API is ready
+                // items={item.items}
                 focusOpen
                 classNameSubmenu="mt-4"
               />

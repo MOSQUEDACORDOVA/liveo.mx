@@ -1,6 +1,6 @@
 export interface MenuDisplayProps {
   title: string;
-  items: SubMenuDisplay[];
+  items?: SubMenuDisplay[];
   icon?: JSX.Element;
   id?: number;
   colorIcon?: string;

@@ -6,11 +6,14 @@ import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import { CardProviderProps as Props } from "./card-provider.types";
 
 const CardProviders: FC<Props> = (props) => {
-  const { name, category_logo, category_name, image, logo, icon, className } =
-    props;
+  const { name, category_logo, category_name, image, logo, className } = props;
+  const { onClick, id, icon } = props;
 
   return (
-    <div className="snap-start px-2 shrink-0 self-center cursor-pointer">
+    <div
+      className="snap-start px-2 shrink-0 self-center cursor-pointer"
+      onClick={() => onClick?.(id)}
+    >
       <div
         className={`w-72 flex relative flex-col min-h-[350px] ml-1 shadow-md rounded-2xl overflow-hidden shadow-light-black bg-white ${className}`}
       >
