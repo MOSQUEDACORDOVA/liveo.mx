@@ -55,8 +55,10 @@ export const SectionHeader = ({ type }: IProps) => {
       case "allied-notaries":
         return (
           <div className="w-full text-center">
-            <h3 className="text-violet font-bold mb-4">Notarías Aliadas</h3>
-            <Paragraph>
+            <h3 className="text-violet font-bold mb-4 text-7xl">
+              Notarías Aliadas
+            </h3>
+            <Paragraph className="text-2xl">
               En <span className="text-light-violet">liveo</span> podrás
               contratar diferentes notarías a tu disposición.
             </Paragraph>

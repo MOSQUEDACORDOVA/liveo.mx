@@ -3,6 +3,7 @@ import { API, HEADERAUTH, getToken } from "@/config";
 import { RegisteredCompanyRequest } from "@/types/company.types";
 import { registerCompanyMapper } from "./company.services.mapper";
 import { CategoriesServiceResponseDTO } from "./company.services.models";
+import { IUser } from "@/features/LoginRegisterUser";
 
 export const registerCompany = async (data: RegisteredCompanyRequest) => {
   try {
@@ -34,5 +35,32 @@ export const getCategoriesServices = async () => {
     return result.data ?? [];
   } catch (error) {
     throw new Error("Error al obtener las categorias");
+  }
+};
+
+export const getCompanies = async () => {
+  try {
+    const response = await fetch(`${API}/empresas`, {
+      method: "GET",
+      headers: HEADERAUTH(getToken()),
+    });
+
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    throw new Error("Error al obtener las empresas");
+  }
+};
+
+export const searchCompanies = async (query: string): Promise<IUser[]> => {
+  try {
+    const response = await fetch(`${API}/empresas-buscar/${query}`, {
+      method: "GET",
+    });
+
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    throw new Error("Error al obtener las empresas");
   }
 };

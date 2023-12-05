@@ -1,31 +1,27 @@
+import { FC } from "react";
+import { BannerGridProps as Props } from "./banner-grid.types";
 import "./banner-grid.styles.scss";
 
-const BannerGrid = () => {
+const BannerGrid: FC<Props> = (props) => {
+  const { mainImage, secondaryImages } = props;
+
+  const getSecondaryImagesArray = () => {
+    return secondaryImages?.filter((_, index) => index < 3);
+  };
+
   return (
     <div className="banner-grid">
       <picture className="banner-grid__image banner-grid__image--one">
-        <img
-          src="https://media-cdn.tripadvisor.com/media/photo-s/01/89/63/f5/lobby.jpg"
-          alt=""
-        />
+        <img src={`${mainImage}`} alt="main image" />
       </picture>
       <picture className="banner-grid__image banner-grid__image--two">
-        <img
-          src="https://media-cdn.tripadvisor.com/media/photo-s/01/89/63/f5/lobby.jpg"
-          alt=""
-        />
+        <img src={`${getSecondaryImagesArray()[0]?.url}`} alt="" />
       </picture>
       <picture className="banner-grid__image banner-grid__image--three">
-        <img
-          src="https://media-cdn.tripadvisor.com/media/photo-s/01/89/63/f5/lobby.jpg"
-          alt=""
-        />
+        <img src={`${getSecondaryImagesArray()[1]?.url}`} alt="" />
       </picture>
       <picture className="banner-grid__image banner-grid__image--four">
-        <img
-          src="https://media-cdn.tripadvisor.com/media/photo-s/01/89/63/f5/lobby.jpg"
-          alt=""
-        />
+        <img src={`${getSecondaryImagesArray()[2]?.url}`} alt="" />
       </picture>
     </div>
   );
