@@ -1,4 +1,4 @@
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BannerGrid from "@/components/notary/banner-grid/banner-grid";
 import {
   BadgeOutlined,
@@ -9,30 +9,34 @@ import {
 import { Grid } from "@mui/material";
 import TextField from "@/components/material_ui/text-field/text-field";
 import { Button } from "@/components";
+import { useGetProvider } from "@/services/provider/provider.services.hooks";
 
 const ProviderPage = () => {
-  // TODO: DISCLAIM THIS WHEN THE PAGE IS READY
-  // const { id } = useParams();
+  const { id } = useParams();
+  const { data } = useGetProvider(Number(id));
+  const { name, tipo_sector, descripcion, tags = [], telefono } = data ?? {};
+  const { iframe_google, dir_calle, dir_colonia, dir_ciudad } = data ?? {};
+  const { celular, email, imagen_principal_empresa, avatar } = data ?? {};
+  const { imagenes_empresa = [] } = data ?? {};
 
   return (
     <div className="notary-page overflow-hidden p-6 gap-16 md:mb-[40rem] max-w-6xl m-auto">
       <section className="mt-20 flex justify-center items-center gap-16 xl:my-20">
-        <BannerGrid />
+        <BannerGrid
+          mainImage={imagen_principal_empresa}
+          secondaryImages={imagenes_empresa}
+        />
       </section>
       <section>
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <picture className="mr-6 border shadow-md rounded-full p-4">
-              <img
-                src="https://i.ytimg.com/vi/7meLD47PO7s/hqdefault.jpg"
-                className="w-8 h-8"
-                alt="logo"
-              />
+              <img src={`${avatar}`} className="w-8 h-8" alt="logo" />
             </picture>
             <div>
-              <p className="text-2xl font-bold">NAUCALPAN 122</p>
+              <p className="text-2xl font-bold">{name}</p>
               <p className="text-sm font-medium">
-                Notaria <FavoriteBorderOutlined className="w-4" />
+                {tipo_sector} <FavoriteBorderOutlined className="w-4" />
               </p>
             </div>
           </div>
@@ -51,33 +55,21 @@ const ProviderPage = () => {
             md={7}
             className="text-sm text-gray-600 text-justify border-b border-b-gray-200"
           >
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi,
-              natus, at voluptates officiis eveniet est cumque omnis, rerum
-              atque soluta veritatis in eum reprehenderit vitae recusandae
-              asperiores autem facere? Assumenda. Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Praesentium, aperiam officia
-              exercitationem tenetur quaerat voluptate adipisci tempora
-              excepturi ipsum eius esse minima molestiae, quod, laboriosam enim
-              fuga perspiciatis nobis ab!
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-              voluptates aut architecto repellat reiciendis illum pariatur
-              obcaecati eveniet tempora, ducimus odit quas neque a, explicabo
-              facilis sit, recusandae voluptate nihil. Lorem ipsum dolor sit
-              amet consectetur adipisicing elit. Suscipit eius nisi itaque, id
-              harum consequuntur excepturi odit omnis ullam alias similique
-              aliquam iste aspernatur a non labore deserunt. Maxime, commodi?
-            </p>
+            <p className="mb-4">{descripcion}</p>
           </Grid>
           <Grid item md={5}>
-            <div
-              className="mt-5 md:mt-0 max-h-72 overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: `<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5473.620873693417!2d-75.74048809194096!3d-14.051504551948469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2spe!4v1701292397113!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
-              }}
-            ></div>
+            {iframe_google ? (
+              <div
+                className="mt-5 md:mt-0 max-h-72 overflow-hidden"
+                dangerouslySetInnerHTML={{
+                  __html: `${iframe_google}`,
+                }}
+              ></div>
+            ) : (
+              <p className="text-sm font-bold text-center">
+                No se registro ubicación
+              </p>
+            )}
           </Grid>
         </Grid>
       </section>
@@ -103,24 +95,18 @@ const ProviderPage = () => {
       <hr className="my-8" />
       <section>
         <h3 className="text-3xl font-bold">Servicios</h3>
-        <ul className="flex gap-2 text-lg mt-6">
-          <li>
-            <FiberManualRecordRounded className="text-light-violet mr-4" />
-            Inmobiliario
-          </li>
-          <li>
-            <FiberManualRecordRounded className="text-light-violet mr-4" />
-            Corporativo
-          </li>
-          <li>
-            <FiberManualRecordRounded className="text-light-violet mr-4" />
-            Civil
-          </li>
-          <li>
-            <FiberManualRecordRounded className="text-light-violet mr-4" />
-            Notarial
-          </li>
-        </ul>
+        {tags?.length ? (
+          <ul className="flex gap-2 text-lg mt-6">
+            {tags?.map((tag: string, index: number) => (
+              <li key={index}>
+                <FiberManualRecordRounded className="text-light-violet mr-4" />
+                {tag}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm font-bold mt-10">No se registraron servicios</p>
+        )}
       </section>
       <hr className="my-8" />
       <section>
@@ -156,10 +142,7 @@ const ProviderPage = () => {
                 Ubicación
               </h3>
               <p className="text-sm mt-4">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Repudiandae quas sequi maiores maxime nisi similique ad omnis
-                voluptates! Sapiente ipsa impedit qui fugiat quidem expedita
-                possimus velit adipisci asperiores. Culpa!
+                {dir_calle} {dir_colonia} {dir_ciudad}
               </p>
             </div>
             <div className="mt-4">
@@ -169,12 +152,8 @@ const ProviderPage = () => {
                 </div>
                 Teléfono
               </h3>
-              <p className="text-sm mt-4">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Repudiandae quas sequi maiores maxime nisi similique ad omnis
-                voluptates! Sapiente ipsa impedit qui fugiat quidem expedita
-                possimus velit adipisci asperiores. Culpa!
-              </p>
+              <p className="text-sm mt-4">{telefono}</p>
+              <p className="text-sm">{celular}</p>
             </div>
             <div className="mt-4">
               <h3 className="text-3xl font-bold flex justify-start items-center">
@@ -183,7 +162,7 @@ const ProviderPage = () => {
                 </div>
                 Correo Electrónico
               </h3>
-              <p className="text-sm mt-4">correo@correo.com</p>
+              <p className="text-sm mt-4">{email}</p>
             </div>
           </Grid>
         </Grid>

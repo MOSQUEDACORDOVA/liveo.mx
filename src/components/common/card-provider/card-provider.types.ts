@@ -1,4 +1,5 @@
 export interface CardProviderProps {
+  id?: number;
   icon?: JSX.Element;
   name: string;
   logo?: string | null;
@@ -6,4 +7,5 @@ export interface CardProviderProps {
   category_name?: string | null;
   category_logo?: string | null;
   className?: string | null;
+  onClick?: (id?: number) => void;
 }

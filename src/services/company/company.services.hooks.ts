@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from "react-query";
-import { getCategoriesServices, registerCompany } from "./company.services";
+import {
+  getCategoriesServices,
+  registerCompany,
+  getCompanies,
+  searchCompanies,
+} from "./company.services";
 
 export const useRegisterCompany = () => {
   return useMutation(registerCompany);
@@ -10,4 +15,15 @@ export const useGetCategoriesServices = () => {
     retry: 1,
     staleTime: 5 * 1000 * 60,
   });
+};
+
+export const useGetCompanies = () => {
+  return useQuery("companies", getCompanies, {
+    retry: 1,
+    staleTime: 5 * 1000 * 60,
+  });
+};
+
+export const useGetQueryCompanies = (query: string) => {
+  return useQuery(["companies", query], () => searchCompanies(query));
 };

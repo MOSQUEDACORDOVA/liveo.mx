@@ -38,7 +38,7 @@ const MenuDisplay: FC<Props> = (props) => {
           isSubMenuVisible ? "max-h-screen" : ""
         }`}
       >
-        {items.map((item) => (
+        {items?.map((item) => (
           <a
             key={item.id}
             href="#"

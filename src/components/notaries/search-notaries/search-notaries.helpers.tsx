@@ -7,6 +7,23 @@ import {
   OutdoorGrillOutlined,
 } from "@mui/icons-material";
 import { MenuDisplayProps } from "../menu-display/menu-display.types";
+import { CategoryService } from "@/models/category.model";
+
+const MAX_CATEGORIES = 4;
+
+export const getFormatCategories = (categories: CategoryService[]) => {
+  const newCategories: CategoryService[][] = [];
+  let newIndex = 0;
+  categories.forEach((category) => {
+    if (!newCategories[newIndex]) newCategories[newIndex] = [];
+    if (newCategories[newIndex]?.length >= MAX_CATEGORIES) {
+      newIndex++;
+      newCategories[newIndex] = [];
+    }
+    newCategories[newIndex]?.push(category);
+  });
+  return newCategories;
+};
 
 export const getDataNotariesColumnOne = (): MenuDisplayProps[] => [
   {
