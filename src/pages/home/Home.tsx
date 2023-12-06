@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useScrollToTop } from "@/hook";
-import { Vault } from "./components";
+import { Services, Vault, Welcome, WhyChoose } from "./components";
 import { useEffect } from "react";
 
 export const HomePage = () => {
@@ -9,10 +9,10 @@ export const HomePage = () => {
 
   return (
     <div className="overflow-hidden">
-      {/* <Welcome /> */}
-      {/* {/* <Services /> */}
+      <Welcome />
+      <Services />
       <Vault />
-      {/* <WhyChoose /> */}
+      <WhyChoose />
     </div>
   );
 };
