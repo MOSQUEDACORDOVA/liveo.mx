@@ -20,7 +20,7 @@ const ProviderPage = () => {
   const { imagenes_empresa = [] } = data ?? {};
 
   return (
-    <div className="notary-page overflow-hidden p-6 gap-16 md:mb-[40rem] max-w-6xl m-auto">
+    <div className="notary-page overflow-hidden p-6 gap-16 md:mb-[40rem] mb-[10rem] max-w-6xl m-auto">
       <section className="mt-20 flex justify-center items-center gap-16 xl:my-20">
         <BannerGrid
           mainImage={imagen_principal_empresa}
@@ -112,7 +112,7 @@ const ProviderPage = () => {
       <section>
         <h3 className="text-3xl font-bold">Contacto</h3>
         <Grid container columns={12} className="mt-6">
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
             <form className="flex flex-col gap-6">
               <TextField label="Nombre" name="name" />
               <TextField label="Correo electrónico" name="email" />
@@ -133,7 +133,7 @@ const ProviderPage = () => {
               />
             </form>
           </Grid>
-          <Grid item md={6} className="pl-20">
+          <Grid item md={6} xs={12} className="md:pl-20 md:mt-0 mt-10 ">
             <div>
               <h3 className="text-3xl font-bold flex justify-start items-center">
                 <div className="rounded-full bg-light-violet p-2 text-white text-xs mr-4">
