@@ -3,6 +3,7 @@ import CardProviders from "@/components/common/card-provider/card-provider";
 import FilterNotaries from "@/components/notaries/filter-notaries/filter-notaries";
 import SearchNotaries from "@/components/notaries/search-notaries/search-notaries";
 import { IUser } from "@/features/LoginRegisterUser";
+import { useScrollToTop } from "@/hook";
 import { useGetQueryCompanies } from "@/services/company/company.services.hooks";
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -12,6 +13,7 @@ const NotariesPage = () => {
   const [dataProviders, setDataProviders] = useState<IUser[]>([]);
   const [showAll, setShowAll] = useState(false);
 
+  const { handleScrollToTop } = useScrollToTop();
   const [search, setSearch] = useState("all");
   const { data } = useGetQueryCompanies(search);
   const navigate = useNavigate();
@@ -19,9 +21,10 @@ const NotariesPage = () => {
   const showAllButton = data?.length && data?.length > 6;
   const showAllButtonText = showAll ? "Ver menos" : "Mostrar todos";
 
-  const handleCardClick = (id?: number) => {
-    if (!id) return;
-    navigate(`/proveedor/${id}`);
+  const handleCardClick = (url?: string) => {
+    if (!url) return;
+    navigate(`/proveedor/${url}`);
+    handleScrollToTop();
   };
 
   const handleDataProviders = () => {
@@ -74,7 +77,7 @@ const NotariesPage = () => {
                     image={item.imagen_principal_empresa}
                     category_name={item.sector}
                     className="w-full"
-                    id={Number(item.id)}
+                    url={item.url_amigable || ""}
                     onClick={handleCardClick}
                   />
                 </Grid>

@@ -4,13 +4,13 @@ import { RegisteredFormValues } from "./registered-form.types";
 export const getDefaultValues = (): RegisteredFormValues => ({
   name: "",
   city: "",
-  colony: "",
+  colony: "México",
   sectorType: "",
   sector: "",
   email: "",
   phoneNumber: "",
   password: "",
-  prefix: "+1",
+  prefix: "+52",
 });
 
 export const getResolverValues = () =>

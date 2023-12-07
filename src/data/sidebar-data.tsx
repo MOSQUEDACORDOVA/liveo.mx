@@ -60,10 +60,11 @@ const sectionsDefault = [
   "Ayuda",
 ];
 
-export const getLinksSidebar = (roles?: IUserRoles[]) => {
-  const isCompany = roles?.filter((role) => role.name === "company");
+const ROLE_COMPANY = 3;
 
-  if (isCompany)
+export const getLinksSidebar = (roles?: IUserRoles[]) => {
+  const isCompany = roles?.filter((role) => role.id === ROLE_COMPANY);
+  if (isCompany && isCompany?.length)
     return LinksSidebarData.filter((item) =>
       sectionsCompany.includes(item.name)
     );

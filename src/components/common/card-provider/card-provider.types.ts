@@ -7,5 +7,6 @@ export interface CardProviderProps {
   category_name?: string | null;
   category_logo?: string | null;
   className?: string | null;
-  onClick?: (id?: number) => void;
+  url?: string;
+  onClick?: (url?: string) => void;
 }

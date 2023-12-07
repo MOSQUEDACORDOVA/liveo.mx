@@ -76,6 +76,10 @@ export const footerLinks = {
         name: "Videos",
         link: PathNames.videos,
       },
+      {
+        name: "Directorio Proveedores",
+        link: PathNames.providers,
+      },
     ],
   },
   intesrestLinks: {

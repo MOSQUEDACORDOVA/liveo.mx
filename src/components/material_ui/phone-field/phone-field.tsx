@@ -57,9 +57,9 @@ const PhoneField: FC<Props> = forwardRef((props, ref) => {
               }}
               onBlur={onBlurPrefix}
             >
+              <MenuItem value="+52">+52</MenuItem>
               <MenuItem value="+1">+1</MenuItem>
               <MenuItem value="+58">+58</MenuItem>
-              <MenuItem value="+52">+52</MenuItem>
             </Select>
           </InputAdornment>
         }

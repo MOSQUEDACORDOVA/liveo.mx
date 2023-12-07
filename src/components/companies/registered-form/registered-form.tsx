@@ -1,7 +1,7 @@
 import ribbon from "@/assets/waves/onda_slide.png";
 import logo from "@/assets/login-register/logo_login.png";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { Checkbox, FormControlLabel, IconButton } from "@mui/material";
+import { Alert, Checkbox, FormControlLabel, IconButton } from "@mui/material";
 import { Button, Title } from "@/components";
 import { INPUTLABELS, STATES } from "@/utils";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +20,11 @@ import PhoneField from "@/components/material_ui/phone-field/phone-field";
 import { RegisteredFormValues } from "./registered-form.types";
 import { useLoginData } from "@/services/auth/auth.services.hooks";
 import { CategoryService } from "@/models/category.model";
+import { useState } from "react";
 
 const RegisteredForm = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
   const { mutateAsync: registerCompany, isLoading: isLoadingRegister } =
     useRegisterCompany();
@@ -50,8 +53,11 @@ const RegisteredForm = () => {
         email: values.email,
         password: values.password,
       });
-    } catch (error) {
-      console.log({ error });
+    } catch (error: any) {
+      setErrorMessage(error.message || "Error al registrar la empresa");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
     }
   };
 
@@ -110,12 +116,6 @@ const RegisteredForm = () => {
               helperText={errors.city?.message}
               {...register("city")}
             />
-            {/* <TextField
-              label={INPUTLABELS.TYPE_SECTOR}
-              error={!!errors.sectorType}
-              helperText={errors.sectorType?.message}
-              {...register("sectorType")}
-            /> */}
             <CustomSelect
               label={INPUTLABELS.TYPE_SECTOR}
               options={categoriesServices ?? []}
@@ -174,12 +174,21 @@ const RegisteredForm = () => {
               label={`Acepto las condiciones de uso y la política de privacidad liveo`}
             />
           </div>
+          <div
+            style={{
+              height: errorMessage ? 70 : 0,
+              marginTop: !errorMessage ? -20 : 0,
+            }}
+            className="duration-200 overflow-hidden"
+          >
+            <Alert severity="warning">{errorMessage}</Alert>
+          </div>
 
           <Button
             type="submit"
             borderColor="light-violet"
             disabled={!isValid}
-            loading={isLoadingRegister && isLoadingLogin}
+            loading={isLoadingRegister || isLoadingLogin}
             full
             text="Regístrate"
             bgColor="violet"
