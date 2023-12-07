@@ -33,6 +33,8 @@ export const LoginPage = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { handleScrollToTop } = useScrollToTop();
+  const { user } = infoLogin ?? {};
+  const { roles } = user ?? {};
 
   useEffect(() => {
     islogged && navigate(PathNames.home);
@@ -49,7 +51,15 @@ export const LoginPage = () => {
         clearTimeout(timeoutMessage());
       }
       if (islogged && infoLogin) {
-        navigate(PathNames.private.profile);
+        let isCompany = false;
+        roles?.forEach((rol: any) => {
+          if (rol.name === "Empresa") {
+            navigate(PathNames.companyProfile);
+            isCompany = true;
+            return;
+          }
+        });
+        if (!isCompany) navigate(PathNames.private.profile);
         setMessage(infoLogin.msg);
         timeoutMessage();
         clearTimeout(timeoutMessage());

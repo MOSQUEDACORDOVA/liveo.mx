@@ -53,6 +53,7 @@ export interface IUser {
   imagenes_empresa: CompanyImage[];
   descripcion?: string;
   web_site?: string;
+  url_amigable?: string;
 }
 
 type ILogin = {

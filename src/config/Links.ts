@@ -7,7 +7,7 @@ export const PathNames = {
   blog: "/blog",
   account: "/cuenta",
   providers: "/proveedores",
-  provider: "/proveedor/:id",
+  provider: "/proveedor/:url",
   privacy: "/aviso-de-privacidad",
   terms: "/terminos-y-condiciones",
   help: "/ayuda",

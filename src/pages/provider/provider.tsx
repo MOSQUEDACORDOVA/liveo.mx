@@ -9,11 +9,11 @@ import {
 import { Grid } from "@mui/material";
 import TextField from "@/components/material_ui/text-field/text-field";
 import { Button } from "@/components";
-import { useGetProvider } from "@/services/provider/provider.services.hooks";
+import { useGetProvidersByUrl } from "@/services/provider/provider.services.hooks";
 
 const ProviderPage = () => {
-  const { id } = useParams();
-  const { data } = useGetProvider(Number(id));
+  const { url = "" } = useParams();
+  const { data } = useGetProvidersByUrl(url);
   const { name, tipo_sector, descripcion, tags = [], telefono } = data ?? {};
   const { iframe_google, dir_calle, dir_colonia, dir_ciudad } = data ?? {};
   const { celular, email, imagen_principal_empresa, avatar } = data ?? {};
@@ -21,7 +21,7 @@ const ProviderPage = () => {
 
   return (
     <div className="notary-page overflow-hidden p-6 gap-16 md:mb-[40rem] mb-[10rem] max-w-6xl m-auto">
-      <section className="mt-20 flex justify-center items-center gap-16 xl:my-20">
+      <section className="flex justify-center items-center gap-16 mb-10 mt-10 xl:mb-20 xl:mt-20">
         <BannerGrid
           mainImage={imagen_principal_empresa}
           secondaryImages={imagenes_empresa}
@@ -73,27 +73,7 @@ const ProviderPage = () => {
           </Grid>
         </Grid>
       </section>
-      <section className="pt-4">
-        <h3 className="text-3xl font-bold">Equipo</h3>
-        <p className="mt-4 text-sm text-gray-500">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel hic,
-          mollitia ipsum similique sapiente aperiam. Consequatur ea eveniet quod
-          architecto fugiat animi, voluptatem similique accusantium quisquam
-          maxime distinctio et assumenda. Lorem ipsum dolor sit amet,
-          consectetur adipisicing elit. Fugiat commodi voluptate beatae
-          repudiandae dolorum, natus a deleniti voluptatibus maiores et at
-          obcaecati eum repellendus culpa doloremque blanditiis nemo ipsa? Fuga!
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi dolore
-          pariatur ad doloremque ullam cum dolores veniam quaerat repellendus
-          fugit maxime aliquid at, assumenda et aliquam quo cumque eveniet odit?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab sequi
-          officiis a magni voluptatibus dolores cum sunt exercitationem maiores
-          neque consectetur repellendus sit vitae ea laudantium eos, doloribus
-          provident veniam!
-        </p>
-      </section>
-      <hr className="my-8" />
-      <section>
+      <section className="pt-6">
         <h3 className="text-3xl font-bold">Servicios</h3>
         {tags?.length ? (
           <ul className="flex gap-2 text-lg mt-6">
