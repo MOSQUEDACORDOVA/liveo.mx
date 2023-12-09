@@ -3,13 +3,13 @@ import BannerGrid from "@/components/notary/banner-grid/banner-grid";
 import {
   BadgeOutlined,
   FavoriteBorderOutlined,
+  FavoriteOutlined,
   FiberManualRecordRounded,
   PhoneAndroidOutlined,
 } from "@mui/icons-material";
-import { Grid } from "@mui/material";
-import TextField from "@/components/material_ui/text-field/text-field";
-import { Button } from "@/components";
+import { Grid, IconButton } from "@mui/material";
 import { useGetProvidersByUrl } from "@/services/provider/provider.services.hooks";
+import { ProviderSendEmailForm } from "@/components/provider/provider-send-email-form/provider-send-email-form";
 
 const ProviderPage = () => {
   const { url = "" } = useParams();
@@ -18,6 +18,8 @@ const ProviderPage = () => {
   const { iframe_google, dir_calle, dir_colonia, dir_ciudad } = data ?? {};
   const { celular, email, imagen_principal_empresa, avatar } = data ?? {};
   const { imagenes_empresa = [] } = data ?? {};
+
+  const favorite = false;
 
   return (
     <div className="notary-page overflow-hidden p-6 gap-16 md:mb-[40rem] mb-[10rem] max-w-6xl m-auto">
@@ -36,7 +38,14 @@ const ProviderPage = () => {
             <div>
               <p className="text-2xl font-bold">{name}</p>
               <p className="text-sm font-medium">
-                {tipo_sector} <FavoriteBorderOutlined className="w-4" />
+                {tipo_sector}&nbsp;
+                <IconButton className="p-0 bg-transparent">
+                  {favorite ? (
+                    <FavoriteOutlined className="w-4" />
+                  ) : (
+                    <FavoriteBorderOutlined className="w-4" />
+                  )}
+                </IconButton>
               </p>
             </div>
           </div>
@@ -93,25 +102,7 @@ const ProviderPage = () => {
         <h3 className="text-3xl font-bold">Contacto</h3>
         <Grid container columns={12} className="mt-6">
           <Grid item md={6} xs={12}>
-            <form className="flex flex-col gap-6">
-              <TextField label="Nombre" name="name" />
-              <TextField label="Correo electrónico" name="email" />
-              <TextField
-                label="Mensaje"
-                name="message"
-                multiline
-                minRows={3}
-                maxRows={10}
-                fullWidth
-                sx={{ borderRadius: 50 }}
-              />
-
-              <Button
-                bgColor="violet"
-                className="p-2 px-16 text-lg"
-                text="Enviar"
-              />
-            </form>
+            <ProviderSendEmailForm />
           </Grid>
           <Grid item md={6} xs={12} className="md:pl-20 md:mt-0 mt-10 ">
             <div>
