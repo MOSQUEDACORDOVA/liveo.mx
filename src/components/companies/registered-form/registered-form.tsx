@@ -2,7 +2,7 @@ import ribbon from "@/assets/waves/onda_slide.png";
 import logo from "@/assets/login-register/logo_login.png";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { Alert, Checkbox, FormControlLabel, IconButton } from "@mui/material";
-import { Button, Title } from "@/components";
+import { Title } from "@/components";
 import { INPUTLABELS, STATES } from "@/utils";
 import { useNavigate } from "react-router-dom";
 import { PathNames } from "@/config";
@@ -21,6 +21,7 @@ import { RegisteredFormValues } from "./registered-form.types";
 import { useLoginData } from "@/services/auth/auth.services.hooks";
 import { CategoryService } from "@/models/category.model";
 import { useState } from "react";
+import Button from "@/components/global/button/button";
 
 const RegisteredForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -186,13 +187,13 @@ const RegisteredForm = () => {
 
           <Button
             type="submit"
-            borderColor="light-violet"
             disabled={!isValid}
             loading={isLoadingRegister || isLoadingLogin}
             full
-            text="Regístrate"
             bgColor="violet"
-          />
+          >
+            Regístrate
+          </Button>
         </form>
       </FormProvider>
     </div>

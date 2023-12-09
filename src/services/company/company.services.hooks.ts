@@ -1,10 +1,7 @@
 import { useMutation, useQuery } from "react-query";
-import {
-  getCategoriesServices,
-  registerCompany,
-  getCompanies,
-  searchCompanies,
-} from "./company.services";
+import { getCategoriesServices, registerCompany } from "./company.services";
+import { searchCompanies, companySendEmail } from "./company.services";
+import { getCompanies } from "./company.services";
 
 export const useRegisterCompany = () => {
   return useMutation(registerCompany);
@@ -26,4 +23,8 @@ export const useGetCompanies = () => {
 
 export const useGetQueryCompanies = (query: string) => {
   return useQuery(["companies", query], () => searchCompanies(query));
+};
+
+export const useCompanySendEmail = () => {
+  return useMutation(companySendEmail);
 };

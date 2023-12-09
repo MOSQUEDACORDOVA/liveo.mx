@@ -1,9 +1,11 @@
 import "reflect-metadata";
 import { API, HEADERAUTH, getToken } from "@/config";
 import { RegisteredCompanyRequest } from "@/types/company.types";
+import { companySendEmailMapper } from "./company.services.mapper";
 import { registerCompanyMapper } from "./company.services.mapper";
 import { CategoriesServiceResponseDTO } from "./company.services.models";
 import { IUser } from "@/features/LoginRegisterUser";
+import { CompanySendEmail } from "./company.services.types";
 
 export const registerCompany = async (data: RegisteredCompanyRequest) => {
   try {
@@ -62,5 +64,22 @@ export const searchCompanies = async (query: string): Promise<IUser[]> => {
     return result.data;
   } catch (error) {
     throw new Error("Error al obtener las empresas");
+  }
+};
+
+export const companySendEmail = async (data: CompanySendEmail) => {
+  try {
+    const body = companySendEmailMapper(data);
+    const response = await fetch(`${API}/empresas/enviar-correo`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw new Error("Error al enviar el correo");
   }
 };
