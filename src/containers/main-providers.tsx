@@ -7,7 +7,7 @@ import queryClient from "@/config/query-client.ts";
 const MainProviders = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>{children}</Provider>;
+      <Provider store={store}>{children}</Provider>
     </QueryClientProvider>
   );
 };

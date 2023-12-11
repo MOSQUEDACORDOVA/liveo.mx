@@ -54,6 +54,7 @@ export interface IUser {
   descripcion?: string;
   web_site?: string;
   url_amigable?: string;
+  isFav?: boolean;
 }
 
 type ILogin = {

@@ -1,25 +1,40 @@
 import { useParams } from "react-router-dom";
 import BannerGrid from "@/components/notary/banner-grid/banner-grid";
-import {
-  BadgeOutlined,
-  FavoriteBorderOutlined,
-  FavoriteOutlined,
-  FiberManualRecordRounded,
-  PhoneAndroidOutlined,
-} from "@mui/icons-material";
+import { BadgeOutlined, FavoriteBorderOutlined } from "@mui/icons-material";
+import { FiberManualRecordRounded } from "@mui/icons-material";
+import { FavoriteOutlined, PhoneAndroidOutlined } from "@mui/icons-material";
 import { Grid, IconButton } from "@mui/material";
 import { useGetProvidersByUrl } from "@/services/provider/provider.services.hooks";
 import { ProviderSendEmailForm } from "@/components/provider/provider-send-email-form/provider-send-email-form";
+import { useQueryClient } from "react-query";
+import { useDeleteCompanyFavorite } from "@/services/company/company.services.hooks";
+import { useAddCompanyFavorite } from "@/services/company/company.services.hooks";
 
 const ProviderPage = () => {
   const { url = "" } = useParams();
+  const queryClient = useQueryClient();
   const { data } = useGetProvidersByUrl(url);
+  const { mutateAsync: addCompanyFavorite, isLoading: addCompanyLoading } =
+    useAddCompanyFavorite();
+  const {
+    mutateAsync: deleteCompanyFavorite,
+    isLoading: deleteCompanyLoading,
+  } = useDeleteCompanyFavorite();
+
   const { name, tipo_sector, descripcion, tags = [], telefono } = data ?? {};
   const { iframe_google, dir_calle, dir_colonia, dir_ciudad } = data ?? {};
   const { celular, email, imagen_principal_empresa, avatar } = data ?? {};
-  const { imagenes_empresa = [] } = data ?? {};
+  const { imagenes_empresa = [], isFav } = data ?? {};
 
-  const favorite = false;
+  const handleFavorite = async () => {
+    if (!data) return;
+    if (isFav) {
+      await deleteCompanyFavorite({ companyId: Number(data.id) });
+    } else {
+      await addCompanyFavorite({ companyId: Number(data.id) });
+    }
+    queryClient.invalidateQueries("providers");
+  };
 
   return (
     <div className="notary-page overflow-hidden p-6 gap-16 md:mb-[40rem] mb-[10rem] max-w-6xl m-auto">
@@ -39,8 +54,12 @@ const ProviderPage = () => {
               <p className="text-2xl font-bold">{name}</p>
               <p className="text-sm font-medium">
                 {tipo_sector}&nbsp;
-                <IconButton className="p-0 bg-transparent">
-                  {favorite ? (
+                <IconButton
+                  className="p-0 bg-transparent"
+                  onClick={handleFavorite}
+                  disabled={addCompanyLoading || deleteCompanyLoading}
+                >
+                  {isFav ? (
                     <FavoriteOutlined className="w-4" />
                   ) : (
                     <FavoriteBorderOutlined className="w-4" />

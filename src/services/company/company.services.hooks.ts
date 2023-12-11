@@ -1,5 +1,10 @@
-import { useMutation, useQuery } from "react-query";
-import { getCategoriesServices, registerCompany } from "./company.services";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import {
+  addCompanyFavorite,
+  deleteCompanyFavorite,
+  getCategoriesServices,
+  registerCompany,
+} from "./company.services";
 import { searchCompanies, companySendEmail } from "./company.services";
 import { getCompanies } from "./company.services";
 
@@ -27,4 +32,24 @@ export const useGetQueryCompanies = (query: string) => {
 
 export const useCompanySendEmail = () => {
   return useMutation(companySendEmail);
+};
+
+export const useAddCompanyFavorite = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(addCompanyFavorite, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("provider");
+    },
+  });
+};
+
+export const useDeleteCompanyFavorite = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(deleteCompanyFavorite, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("provider");
+    },
+  });
 };
