@@ -17,6 +17,7 @@ export const PathNames = {
   register: "/registrarse",
   register_companie: "/registrar-empresa",
   companyProfile: "/empresa-perfil",
+  companyAbout: "/nosotros",
 
   subscriptions: "/suscripciones",
   workWithUs: "/trabaja-con-nosotros",
