@@ -21,8 +21,7 @@ export const ProviderSendEmailForm = () => {
 
   const onSubmit = async (values: ProviderSendEmailFormValues) => {
     try {
-      const response = await companySendEmail(values);
-      console.log({ response });
+      await companySendEmail(values);
       toast.success("Correo enviado");
     } catch (error) {
       toast.error("Error al enviar el correo");

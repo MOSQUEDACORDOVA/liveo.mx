@@ -70,7 +70,7 @@ export const searchCompanies = async (query: string): Promise<IUser[]> => {
 export const companySendEmail = async (data: CompanySendEmail) => {
   try {
     const body = companySendEmailMapper(data);
-    const response = await fetch(`${API}/empresas/enviar-correo`, {
+    const response = await fetch(`${API}/enviar-email-contacto`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

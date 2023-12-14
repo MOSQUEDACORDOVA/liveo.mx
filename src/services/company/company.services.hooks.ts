@@ -22,7 +22,10 @@ export const useGetCompanies = () => {
 };
 
 export const useGetQueryCompanies = (query: string) => {
-  return useQuery(["companies", query], () => searchCompanies(query));
+  return useQuery(["companies", query], () => searchCompanies(query), {
+    retry: 1,
+    staleTime: 5 * 1000 * 60,
+  });
 };
 
 export const useCompanySendEmail = () => {
