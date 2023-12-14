@@ -34,6 +34,7 @@ export const PathNames = {
 
   private: {
     dashboard: "/dashboard",
+    companyDashboard: "/empresa-dashboard",
     subscriptions: "/mis-suscripciones",
     profile: "/perfil",
     notifications: "/notificaciones",

@@ -18,7 +18,7 @@ export const ProfileHeader = ({ title }: { title: string }) => {
 
   return (
     <div className="flex justify-between gap-4 flex-wrap-reverse">
-      <div className="">
+      <div>
         <h4 className="text-violet font-bold">{title}</h4>
         <div className="flex gap-2 text-lg">
           <b className="">

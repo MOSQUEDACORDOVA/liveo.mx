@@ -15,5 +15,5 @@ export const registerCompanyMapper = (data: RegisteredCompanyRequest) => ({
 export const companySendEmailMapper = (data: CompanySendEmail) => ({
   email: data.email,
   nombre: data.name,
-  mensaje: data.message,
+  texto: data.message,
 });

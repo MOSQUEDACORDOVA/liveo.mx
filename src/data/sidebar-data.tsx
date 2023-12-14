@@ -10,11 +10,18 @@ import {
 } from "@/icons";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
-export const LinksSidebarData = [
+const ROLE_COMPANY = 3;
+
+const getLinkSidebar = (roles?: IUserRoles[]) => {
+  const isCompany = roles?.filter((role) => role.id === ROLE_COMPANY);
+  if (isCompany) return PathNames.private.companyDashboard;
+  return "#";
+};
+
+export const LinksSidebarData = (roles?: IUserRoles[]) => [
   {
     name: "Dashboard",
-    // href: PathNames.private.dashboard,
-    href: "#",
+    href: getLinkSidebar(roles),
     icon: <DashboardIcon />,
   },
   {
@@ -60,14 +67,14 @@ const sectionsDefault = [
   "Ayuda",
 ];
 
-const ROLE_COMPANY = 3;
-
 export const getLinksSidebar = (roles?: IUserRoles[]) => {
   const isCompany = roles?.filter((role) => role.id === ROLE_COMPANY);
   if (isCompany && isCompany?.length)
-    return LinksSidebarData.filter((item) =>
+    return LinksSidebarData(roles).filter((item) =>
       sectionsCompany.includes(item.name)
     );
 
-  return LinksSidebarData.filter((item) => sectionsDefault.includes(item.name));
+  return LinksSidebarData(roles).filter((item) =>
+    sectionsDefault.includes(item.name)
+  );
 };
