@@ -13,7 +13,7 @@ export const getLinks = (roles?: IUserRoles[]) => {
     },
     {
       name: "Sobre Liveo",
-      url: "#",
+      url: PathNames.companyAbout,
     },
     // {
     //   name: "Planes",
