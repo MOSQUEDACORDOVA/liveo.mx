@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { API, HEADERAUTH, getToken } from "@/config";
-import { RegisteredCompanyRequest } from "@/types/company.types";
+import { FavoriteUser, RegisteredCompanyRequest } from "@/types/company.types";
 import {
   addCompanyFavoriteMapper,
   companySendEmailMapper,
@@ -121,5 +121,19 @@ export const deleteCompanyFavorite = async (
     return result;
   } catch (error) {
     throw new Error("Error al agregar a favoritos");
+  }
+};
+
+export const getFavorites = async (): Promise<FavoriteUser[]> => {
+  try {
+    const response = await fetch(`${API}/fav-user`, {
+      method: "GET",
+      headers: HEADERAUTH(getToken()),
+    });
+    const result = await response.json();
+
+    return result.data;
+  } catch (error) {
+    throw new Error("Error al obtener favoritos");
   }
 };

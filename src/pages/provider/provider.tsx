@@ -29,7 +29,9 @@ const ProviderPage = () => {
   const handleFavorite = async () => {
     if (!data) return;
     if (isFav) {
-      await deleteCompanyFavorite({ companyId: Number(data.id) });
+      await deleteCompanyFavorite({
+        companyId: Number(data.id),
+      });
     } else {
       await addCompanyFavorite({ companyId: Number(data.id) });
     }

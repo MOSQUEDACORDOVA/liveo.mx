@@ -3,6 +3,7 @@ import {
   addCompanyFavorite,
   deleteCompanyFavorite,
   getCategoriesServices,
+  getFavorites,
   registerCompany,
 } from "./company.services";
 import { searchCompanies, companySendEmail } from "./company.services";
@@ -49,7 +50,15 @@ export const useDeleteCompanyFavorite = () => {
 
   return useMutation(deleteCompanyFavorite, {
     onSuccess: async () => {
-      await queryClient.invalidateQueries("provider");
+      queryClient.invalidateQueries(["provider"]);
+      queryClient.invalidateQueries(["favorites"]);
     },
+  });
+};
+
+export const useGetFavorites = () => {
+  return useQuery("favorites", getFavorites, {
+    retry: 1,
+    staleTime: 5 * 1000 * 60,
   });
 };
