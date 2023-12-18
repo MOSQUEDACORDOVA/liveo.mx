@@ -1,4 +1,5 @@
 import { RegisteredCompanyRequest } from "@/types/company.types";
+import { AddCompanyFavoriteRequest } from "./company.services.types";
 import { CompanySendEmail } from "./company.services.types";
 
 export const registerCompanyMapper = (data: RegisteredCompanyRequest) => ({
@@ -16,4 +17,8 @@ export const companySendEmailMapper = (data: CompanySendEmail) => ({
   email: data.email,
   nombre: data.name,
   texto: data.message,
+});
+
+export const addCompanyFavoriteMapper = (data: AddCompanyFavoriteRequest) => ({
+  fav_id: data.companyId,
 });

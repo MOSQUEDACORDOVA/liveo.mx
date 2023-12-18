@@ -1,11 +1,18 @@
 import "reflect-metadata";
 import { API, HEADERAUTH, getToken } from "@/config";
-import { RegisteredCompanyRequest } from "@/types/company.types";
-import { companySendEmailMapper } from "./company.services.mapper";
+import { FavoriteUser, RegisteredCompanyRequest } from "@/types/company.types";
+import {
+  addCompanyFavoriteMapper,
+  companySendEmailMapper,
+} from "./company.services.mapper";
 import { registerCompanyMapper } from "./company.services.mapper";
 import { CategoriesServiceResponseDTO } from "./company.services.models";
 import { IUser } from "@/features/LoginRegisterUser";
-import { CompanySendEmail } from "./company.services.types";
+import {
+  AddCompanyFavoriteRequest,
+  CompanySendEmail,
+  RemoveCompanyFavoriteRequest,
+} from "./company.services.types";
 
 export const registerCompany = async (data: RegisteredCompanyRequest) => {
   try {
@@ -81,5 +88,52 @@ export const companySendEmail = async (data: CompanySendEmail) => {
     return result;
   } catch (error) {
     throw new Error("Error al enviar el correo");
+  }
+};
+
+export const addCompanyFavorite = async (data: AddCompanyFavoriteRequest) => {
+  try {
+    const body = addCompanyFavoriteMapper(data);
+    const response = await fetch(`${API}/fav-user`, {
+      method: "POST",
+      headers: HEADERAUTH(getToken()),
+      body: JSON.stringify(body),
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    throw new Error("Error al agregar a favoritos");
+  }
+};
+
+export const deleteCompanyFavorite = async (
+  data: RemoveCompanyFavoriteRequest
+) => {
+  try {
+    const { companyId } = data;
+    const response = await fetch(`${API}/fav-user/${companyId}`, {
+      method: "DELETE",
+      headers: HEADERAUTH(getToken()),
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    throw new Error("Error al agregar a favoritos");
+  }
+};
+
+export const getFavorites = async (): Promise<FavoriteUser[]> => {
+  try {
+    const response = await fetch(`${API}/fav-user`, {
+      method: "GET",
+      headers: HEADERAUTH(getToken()),
+    });
+    const result = await response.json();
+
+    return result.data;
+  } catch (error) {
+    throw new Error("Error al obtener favoritos");
   }
 };
