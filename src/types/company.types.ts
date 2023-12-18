@@ -1,3 +1,5 @@
+import { IUser } from "@/features/LoginRegisterUser";
+
 export interface RegisteredCompanyRequest {
   id?: number;
   name: string;
@@ -18,4 +20,12 @@ export interface CompanyImage {
   updated_at: string;
   url: string;
   user_id: string;
+}
+
+export interface FavoriteUser {
+  created_at: string;
+  id: number;
+  user_id: number;
+  fav_obj: IUser;
+  fav_id: number;
 }
